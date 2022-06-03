@@ -57,15 +57,14 @@ jobs:
           --acl private \
           ./2cube-build.zip s3://2cube-deploy/
 
-      # Deploy
-#       - name: Deploy
-#         env:
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         run: |
-#           aws deploy create-deployment \
-#           --application-name springboot-intro \
-#           --deployment-group-name springboot-intro-deploy-group \
-#           --file-exists-behavior OVERWRITE \
-#           --s3-location bucket=springboot-intro-build,bundleType=zip,key=springboot-intro-build.zip \
-#           --region ap-northeast-2
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws deploy create-deployment \
+          --application-name 2cube \
+          --deployment-group-name 2Cube-deploy-group \
+          --file-exists-behavior OVERWRITE \
+          --s3-location bucket=2cube-deploy,bundleType=zip,key=2cube-build.zip \
+          --region ap-northeast-2
