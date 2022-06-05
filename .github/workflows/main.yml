@@ -55,7 +55,7 @@ jobs:
           aws s3 cp \
           --region ap-northeast-2 \
           --acl private \
-          ./2cube-build.zip s3://2cube-deploy/
+          ./2cube-build.zip s3://ecube-deploy/
 
       - name: Deploy
         env:
@@ -66,5 +66,5 @@ jobs:
           --application-name 2cube \
           --deployment-group-name 2Cube-deploy-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=2cube-deploy,bundleType=zip,key=2cube-build.zip \
+          --s3-location bucket=ecube-deploy,bundleType=zip,key=2cube-build.zip \
           --region ap-northeast-2
