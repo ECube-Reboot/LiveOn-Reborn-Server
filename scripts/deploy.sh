@@ -4,6 +4,12 @@ REPOSITORY=/home/ec2-user/app/step2/zip
 
 echo">check running pid"
 
+
+CURRENT_PID=$(pgrep -f 2Cube)
+
+
+echo "> CURRENT_PID"
+
 echo "$CURRENT_PID"
 
 if [ -z $CURRENT_PID ]; then
