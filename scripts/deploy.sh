@@ -5,7 +5,7 @@ REPOSITORY=/home/ec2-user/app/step2/zip
 echo">check running pid"
 
 
-CURRENT_PID=$(pgrep -f Qnnect)
+CURRENT_PID=$(pgrep -f 2Cube)
 
 
 echo "> CURRENT_PID"
