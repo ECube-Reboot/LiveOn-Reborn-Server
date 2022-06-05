@@ -10,6 +10,7 @@ CURRENT_PID=$(pgrep -f 2Cube)
 
 echo "> CURRENT_PID"
 
+echo "$CURRENT_PID"
 
 if [ -z $CURRENT_PID ]; then
     echo "> There is no pid running currently."
