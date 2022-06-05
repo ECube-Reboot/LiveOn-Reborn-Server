@@ -91,6 +91,10 @@ build {
     dependsOn copyDocument
 }
 
+jar {
+    enabled = false
+}
+
 
 // 참고사항 //
 // 공식 문서에서는 위의 ascidoctor.doFirst부터 아래 내용은 없고 이와 같은 내용만 있습니다.
@@ -103,3 +107,5 @@ bootJar {
         into 'static/docs'
     }
 }
+
+
