@@ -1,11 +1,14 @@
 package com.twoCube.members.domain;
 
+import com.twoCube.common.domain.BaseTimeEntity;
+import com.twoCube.couple.domain.Couple;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.UUID;
 
-public class Member {
+public class Member extends BaseTimeEntity {
 
     private UUID id;
 
