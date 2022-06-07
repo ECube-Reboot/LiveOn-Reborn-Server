@@ -1,4 +1,4 @@
-package main.java.com.twoCube.members.domain;
+package com.twoCube.members.domain;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

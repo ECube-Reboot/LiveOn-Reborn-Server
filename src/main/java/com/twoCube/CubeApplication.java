@@ -1,4 +1,4 @@
-package main.java.com.twoCube;
+package com.twoCube;
 
 import org.springframework.boot.SpringApplication;
 

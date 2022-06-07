@@ -1,4 +1,4 @@
-package main.java.com.twoCube.couple.domain;
+package com.twoCube.couple.domain;
 
 import java.time.LocalDateTime;
 

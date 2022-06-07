@@ -1,4 +1,4 @@
-package main.java.com.twoCube.common.domain;
+package com.twoCube.common.domain;
 
 
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package main.java.com.twoCube.gifts.service;
+package com.twoCube.gifts.service;
 
 import org.springframework.stereotype.Service;
 
