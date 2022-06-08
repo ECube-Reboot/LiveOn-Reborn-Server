@@ -22,4 +22,12 @@ public class CoupleController {
         Code code = new Code();
         return ResponseEntity.ok(code);
     }
+
+    @PostMapping("/code")
+    @ApiOperation(value = "코드 검증 api")
+    public ResponseEntity<Long> createNote(@RequestBody Code code
+//                                           @ApiIgnore @CurrentUser User user
+    ){
+        return ResponseEntity.ok().build();
+    }
 }
