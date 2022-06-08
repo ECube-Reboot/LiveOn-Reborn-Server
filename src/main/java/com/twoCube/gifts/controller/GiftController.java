@@ -25,14 +25,6 @@ public class GiftController {
         return ResponseEntity.ok().build();
     }
 
-//    @ApiOperation(value = "프로필 설정")
-//    @PatchMapping(path = "/user/profile")
-//    public ResponseEntity<ProfileResponse> updateProfile(@ApiIgnore @CurrentUser User user, @RequestPart(required = false) MultipartFile profilePicture,
-//                                                         @RequestPart(required = false) String nickName) {
-//        ProfileResponse profileResponse = userService.updateUserProfile(user, nickName, profilePicture);
-//        return ResponseEntity.ok(profileResponse);
-//    }
-
     @PostMapping("/polaroid")
     @ApiOperation(value = "폴라로이드 생성 api", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Long> createPolaroid(@RequestPart(required = false) MultipartFile polaroid,
