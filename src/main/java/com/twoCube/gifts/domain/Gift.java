@@ -12,8 +12,10 @@ public class Gift extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long gift_id;
+    private long giftId;
     private EGiftType giftType;
+
+    private boolean isChecked;
 
     @ManyToOne
     @JoinColumn(name="member_id")
