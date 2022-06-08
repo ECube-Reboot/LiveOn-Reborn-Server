@@ -1,5 +1,6 @@
 package com.twoCube.gifts.controller;
 
+import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.dto.NoteRequest;
 import com.twoCube.gifts.dto.PillListResponse;
 import com.twoCube.gifts.dto.PillRequest;
@@ -49,11 +50,20 @@ public class GiftController {
 
     @GetMapping("/pills")
     @ApiOperation(value = "영양제 list 호출 api")
-    public ResponseEntity<List<PillListResponse>> createPolaroid(
+    public ResponseEntity<List<PillListResponse>> getPillList(
 //                                           @ApiIgnore @CurrentUser User user
     ){
         List<PillListResponse> pillListResponse = new ArrayList<>();
         return ResponseEntity.ok(pillListResponse);
+    }
+
+    @GetMapping("/flowers")
+    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
+    public ResponseEntity<FlowerResponse> getFlowerList(
+//                                           @ApiIgnore @CurrentUser User user
+    ){
+        FlowerResponse flowerResponse = new FlowerResponse();
+        return ResponseEntity.ok(flowerResponse);
     }
 
 }
