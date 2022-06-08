@@ -1,9 +1,6 @@
 package com.twoCube.gifts.controller;
 
-import com.twoCube.gifts.dto.FlowerResponse;
-import com.twoCube.gifts.dto.NoteRequest;
-import com.twoCube.gifts.dto.PillListResponse;
-import com.twoCube.gifts.dto.PillRequest;
+import com.twoCube.gifts.dto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -66,4 +63,11 @@ public class GiftController {
         return ResponseEntity.ok(flowerResponse);
     }
 
+    @PostMapping("/flowers")
+    @ApiOperation(value = "꽃 선물하기 api")
+    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest
+//                                           @ApiIgnore @CurrentUser User user
+    ){
+        return ResponseEntity.ok().build();
+    }
 }
