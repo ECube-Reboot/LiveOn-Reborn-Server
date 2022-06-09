@@ -31,4 +31,5 @@ public class CalendarController {
         DayRequest dayRequest = new DayRequest();
         return ResponseEntity.ok(dayRequest);
     }
+
 }
