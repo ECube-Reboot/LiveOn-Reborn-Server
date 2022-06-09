@@ -70,4 +70,13 @@ public class GiftController {
     ){
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/main")
+    @ApiOperation(value = "선물 메인 api")
+    public ResponseEntity<MainRequest> getMain(
+//                                           @ApiIgnore @CurrentUser User user
+    ){
+        MainRequest mainRequest = new MainRequest();
+        return ResponseEntity.ok().build();
+    }
 }

@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("LiveOn API 명세서")
+                .title("LivOn API 명세서")
                 .version("1.0")
                 .build();
     }
