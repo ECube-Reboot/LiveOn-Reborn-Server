@@ -1,6 +1,6 @@
 package com.twoCube.calendar.dto;
 
-import com.twoCube.gifts.dto.FlowerResponse;
+import com.twoCube.gifts.dto.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +10,7 @@ public class DayRequest {
     private String message;
 
     private List<UserAudioResponse> audioResponseList;
-    private List<UserPolaroiodResponse> polaroidResponseList;
+    private List<UserPolaroidResponse> polaroidResponseList;
     private List<UserNoteResponse> noteResponseList;
     private List<UserFlowerResponse> flowerResponseList;
     private List<UserPillResponse> pillResponseList;
