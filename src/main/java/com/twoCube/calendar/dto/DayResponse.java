@@ -5,7 +5,7 @@ import com.twoCube.gifts.dto.*;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DayRequest {
+public class DayResponse {
     private LocalDate selectedDate;
     private String message;
 
