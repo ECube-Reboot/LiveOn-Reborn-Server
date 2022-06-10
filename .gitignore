@@ -23,7 +23,8 @@
 *.rar
 *.gradle
 *.idea
-*.build
+*build
+*.gradle
 
 previous-compilation-data.bin
 
