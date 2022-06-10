@@ -5,8 +5,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Test;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/testing")
@@ -38,5 +42,15 @@ public class Controller {
 //                                           @ApiIgnore @CurrentUser User user
     ){
         return ResponseEntity.ok(testDto);
+    }
+
+    @PostMapping("/image")
+    @ApiOperation(value = "multipart/form데이터 연동 api", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<TestMultipartDto> createPolaroid(@RequestPart(required = false) MultipartFile image,
+                                               @RequestPart(required = false) String content
+//                                           @ApiIgnore @CurrentUser User user
+    ) throws IOException {
+        return ResponseEntity.ok(
+                new TestMultipartDto(image.getOriginalFilename(), content));
     }
 }
