@@ -1,7 +1,8 @@
 package com.twoCube.calendar.controller;
 
 import com.twoCube.calendar.dto.AnniversaryRequest;
-import com.twoCube.calendar.dto.DayResponse;
+
+import com.twoCube.calendar.dto.DayRequestDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +25,11 @@ public class CalendarController {
 
     @GetMapping("/day")
     @ApiOperation(value = "하루 보기 api")
-    public ResponseEntity<DayResponse> getDay(
+    public ResponseEntity<DayRequestDto> getDayGift(
 //                                           @ApiIgnore @CurrentUser User user
     ){
-        DayResponse dayResponse = new DayResponse();
-        return ResponseEntity.ok(dayResponse);
+        DayRequestDto dayRequest = new DayRequestDto();
+        return ResponseEntity.ok(dayRequest);
     }
+
 }
