@@ -1,11 +1,13 @@
 package com.twoCube.calendar.dto;
 
 import com.twoCube.gifts.dto.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class DayRequest {
+@Getter
+public class DayRequestDto {
     private LocalDate selectedDate;
     private String message;
 
