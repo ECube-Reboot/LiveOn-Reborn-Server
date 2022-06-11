@@ -15,6 +15,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/v1/testing")
 @RequiredArgsConstructor
+@Api(tags = {"임시 API"})
 public class Controller {
 
     @GetMapping("/test")

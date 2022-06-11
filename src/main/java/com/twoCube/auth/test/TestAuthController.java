@@ -12,7 +12,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("/api/v1/test")
 @RequiredArgsConstructor
 @Slf4j
-@Api(tags = {"인증 관련 API"})
+@Api(tags = {"임시 API"})
 public class TestAuthController {
 
     private final TestAuthService authUserService;
