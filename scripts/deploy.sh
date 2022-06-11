@@ -34,4 +34,8 @@ echo "> give authority to $JAR_NAME"
 
 chmod +x $JAR_NAME
 
-nohup java -jar $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar \
+    -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-realdb.yml\
+    -Dspring.profiles.active=develop \
+    $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+
