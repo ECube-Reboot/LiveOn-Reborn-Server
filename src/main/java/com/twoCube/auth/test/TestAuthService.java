@@ -6,6 +6,7 @@ import com.twoCube.auth.Token.RefreshTokenRepository;
 import com.twoCube.auth.Token.TokenDto;
 import com.twoCube.auth.Token.TokenService;
 import com.twoCube.members.domain.Member;
+import com.twoCube.members.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -138,32 +139,37 @@ public class TestAuthService {
 //    }
 
 
-
     public TestAuthResponse testSignUpOrLogIn(TestAuthRequest authRequest) {
         Member member;
+
+        member = Member.builder()
+                .socialId(authRequest.getName())
+                .build();
 
         TokenDto token = tokenService.generateToken(authRequest.getName(), "USER");
 
         boolean isNewMember = false;
         boolean isUserSettingDone = false;
 
-        if (memberRepository.findByNickName(member.getNickName).equals(Optional.empty())) {
+        if (memberRepository.findBySocialId(member.getSocialId()).equals(Optional.empty())) {
+            member.setNickName(authRequest.getName());
             memberRepository.save(member);
 
             refreshToken = RefreshToken.builder()
-                    .id(member.getNickName)
+                    .id(member.getSocialId())
                     .refreshToken(token.getRefreshToken())
                     .build();
+            System.out.println("not saving");
 
             //refreshToken 저장
-//            member.setRefreshToken(refreshToken);
-//            memberRepository.save(member);
+            refreshTokenRepository.save(refreshToken);
             isNewMember = true;
+
         } else {
-            Optional<Member> currentUser = memberRepository.findByNickName(member.getNickName);
-            Optional<RefreshToken> oldRefreshToken = refreshTokenRepository.findById(member.getNickName);
+            Optional<Member> currentUser = memberRepository.findBySocialId(member.getSocialId());
+            Optional<RefreshToken> oldRefreshToken = refreshTokenRepository.findById(member.getSocialId());
             if (!oldRefreshToken.equals(Optional.empty())) {
-                refreshToken = refreshTokenRepository.getById(member.getNickName);
+                refreshToken = refreshTokenRepository.getById(member.getSocialId());
                 refreshToken = refreshToken.updateValue(token.getRefreshToken());
             } else {
                 refreshToken = RefreshToken.builder()

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/test")
 @RequiredArgsConstructor
 @Slf4j
 @Api(tags = {"인증 관련 API"})

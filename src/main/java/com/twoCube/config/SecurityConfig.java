@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger-resources/**",
-                "/swagger-ui/**", "/webjars/**","/h2-console/**", "/oauth/**");
+                "/swagger-ui/**", "/webjars/**","/h2-console/**", "/oauth/**", "/test/**");
     }
 
     @Override
@@ -39,7 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/v1/auth/**",
                         "/api/v1/version",
                         "/auth/**",
-                        "/token/**").permitAll()
+                        "/token/**",
+                        "/api/v1/test/**",
+                        "/api/v1/testing/**",
+                        "/test/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

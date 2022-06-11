@@ -1,3 +1,23 @@
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: 'false'
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: 'true'
+    show-sql: 'true'
+
   profiles:
-    include: real-db
+    group:
+      dev: "real-db,aws"
+
+  servlet:
+    multipart:
+      maxFileSize: 8MB
+      maxRequestSize: 8MB
+
+  session:
+    store-type: jdbc
