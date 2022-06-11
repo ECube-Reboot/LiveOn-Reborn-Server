@@ -1,3 +1,5 @@
 spring:
   profiles:
-    include: real-db
+    active: develop # 활성화시킬 프로필
+    group: # 포함시킬 하위 프로필명
+      develop: develop,oauth,realdb

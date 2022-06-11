@@ -1,7 +1,6 @@
 package com.twoCube.members.controller;
 
 
-import com.twoCube.couple.dto.Code;
 import com.twoCube.members.dto.MemberInfoRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
