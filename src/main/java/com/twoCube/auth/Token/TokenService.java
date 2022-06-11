@@ -24,7 +24,7 @@ public class TokenService {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public Token generateToken(String uid, String role) {
+    public TokenDto generateToken(String uid, String role) {
         long tokenPeriod = 1000L * 60L * 90L;
         long refreshPeriod = 1000L * 60L * 60L * 24L * 30L * 3L;
 
@@ -32,7 +32,7 @@ public class TokenService {
         claims.put("role", role);
 
         Date now = new Date();
-        return new Token(
+        return new TokenDto(
                 Jwts.builder()
                         .setClaims(claims)
                         .setIssuedAt(now)

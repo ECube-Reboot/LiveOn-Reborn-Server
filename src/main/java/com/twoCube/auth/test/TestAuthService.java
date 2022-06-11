@@ -1,7 +1,9 @@
 package com.twoCube.auth.test;
 
 
-import com.twoCube.auth.Token.Token;
+import com.twoCube.auth.Token.RefreshToken;
+import com.twoCube.auth.Token.RefreshTokenRepository;
+import com.twoCube.auth.Token.TokenDto;
 import com.twoCube.auth.Token.TokenService;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class TestAuthService {
 
     private final MemberRepository memberRepository;
     private final TokenService tokenService;
+    private final RefreshTokenRepository refreshTokenRepository;
 //    private final ClientApple clientApple;
     private RefreshToken refreshToken;
 
@@ -139,7 +142,7 @@ public class TestAuthService {
     public TestAuthResponse testSignUpOrLogIn(TestAuthRequest authRequest) {
         Member member;
 
-        Token token = tokenService.generateToken(authRequest.getName(), "USER");
+        TokenDto token = tokenService.generateToken(authRequest.getName(), "USER");
 
         boolean isNewMember = false;
         boolean isUserSettingDone = false;
@@ -151,8 +154,10 @@ public class TestAuthService {
                     .id(member.getNickName)
                     .refreshToken(token.getRefreshToken())
                     .build();
-            member.setRefreshToken(refreshToken);
-            memberRepository.save(member);
+
+            //refreshToken 저장
+//            member.setRefreshToken(refreshToken);
+//            memberRepository.save(member);
             isNewMember = true;
         } else {
             Optional<Member> currentUser = memberRepository.findByNickName(member.getNickName);
