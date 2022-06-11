@@ -1,29 +1,30 @@
-//package com.twoCube.auth;
-//
-//
-//import com.twoCube.members.domain.Member;
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//
-//import java.util.Optional;
-//
-//@Service
-//@RequiredArgsConstructor
-//@Slf4j
-//public class AuthService {
-//
-////    private final UserRepository userRepository;
-////    private final TokenService tokenService;
-////    private final ClientApple clientApple;
-////    private RefreshToken refreshToken;
-//
+package com.twoCube.auth.test;
+
+
+import com.twoCube.auth.Token.Token;
+import com.twoCube.auth.Token.TokenService;
+import com.twoCube.members.domain.Member;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class TestAuthService {
+
+    private final MemberRepository memberRepository;
+    private final TokenService tokenService;
+//    private final ClientApple clientApple;
+    private RefreshToken refreshToken;
+
 //    public AuthResponse signUpOrLogIn(AuthRequest authRequest) {
-////        User user;
+//        Member member;
 //
-//        user = getAppleProfile(authRequest.getAccessToken());
+//        member = getAppleProfile(authRequest.getAccessToken());
 //
 //
 //        Token token = tokenService.generateToken(user.getSocialId(), "USER");
@@ -132,4 +133,52 @@
 //        user.setSocialId(null);
 //        userRepository.save(user);
 //    }
-//}
+
+
+
+    public TestAuthResponse testSignUpOrLogIn(TestAuthRequest authRequest) {
+        Member member;
+
+        Token token = tokenService.generateToken(authRequest.getName(), "USER");
+
+        boolean isNewMember = false;
+        boolean isUserSettingDone = false;
+
+        if (memberRepository.findByNickName(member.getNickName).equals(Optional.empty())) {
+            memberRepository.save(member);
+
+            refreshToken = RefreshToken.builder()
+                    .id(member.getNickName)
+                    .refreshToken(token.getRefreshToken())
+                    .build();
+            member.setRefreshToken(refreshToken);
+            memberRepository.save(member);
+            isNewMember = true;
+        } else {
+            Optional<Member> currentUser = memberRepository.findByNickName(member.getNickName);
+            Optional<RefreshToken> oldRefreshToken = refreshTokenRepository.findById(member.getNickName);
+            if (!oldRefreshToken.equals(Optional.empty())) {
+                refreshToken = refreshTokenRepository.getById(member.getNickName);
+                refreshToken = refreshToken.updateValue(token.getRefreshToken());
+            } else {
+                refreshToken = RefreshToken.builder()
+                        .id(member.getSocialId())
+                        .refreshToken(token.getRefreshToken())
+                        .build();
+            }
+            refreshTokenRepository.save(refreshToken);
+
+            Member thisMember = currentUser.get();
+            if(thisMember.getNickName() != null){
+                isUserSettingDone = true;
+            }
+        }
+
+        return TestAuthResponse.builder()
+                .isNewMember(isNewMember)
+                .accessToken(token.getAccessToken())
+                .refreshToken(token.getRefreshToken())
+                .userSettingDone(isUserSettingDone)
+                .build();
+    }
+}

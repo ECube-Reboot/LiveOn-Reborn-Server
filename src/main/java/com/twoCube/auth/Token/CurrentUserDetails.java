@@ -1,4 +1,4 @@
-package com.twoCube.auth;
+package com.twoCube.auth.Token;
 
 import com.twoCube.members.domain.Member;
 import lombok.Getter;

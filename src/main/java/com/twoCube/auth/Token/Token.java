@@ -1,4 +1,4 @@
-package com.twoCube.auth;
+package com.twoCube.auth.Token;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
