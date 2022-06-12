@@ -44,6 +44,9 @@ dependencies {
         exclude group: 'org.json', module: 'json' //provided by Android natively
     }
 
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok' // 추가
