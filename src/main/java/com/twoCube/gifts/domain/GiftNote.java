@@ -3,19 +3,23 @@ package com.twoCube.gifts.domain;
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.members.domain.Member;
+import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.*;
 
+@Getter
+@Builder
 @Entity
-public class Gift extends BaseTimeEntity {
+public class GiftNote extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long giftId;
-    private EGiftType giftType;
 
-    private boolean isChecked;
+    private String content;
+
+    private boolean userChecked;
 
     @ManyToOne
     @JoinColumn(name="member_id")

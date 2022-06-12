@@ -75,6 +75,7 @@ public class TokenService {
 
     public boolean verifyToken(String token) {
         try {
+            System.out.println("verifying");
             Jws<Claims> claims = Jwts.parser()
                     .setSigningKey(secretKey)
                     .parseClaimsJws(token);

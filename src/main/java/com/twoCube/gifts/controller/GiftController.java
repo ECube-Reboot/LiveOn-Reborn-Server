@@ -1,6 +1,10 @@
 package com.twoCube.gifts.controller;
 
+import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
+import com.twoCube.gifts.service.GiftService;
+import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +24,15 @@ import java.util.List;
 @Api(tags = {"선물 API"})
 public class GiftController {
 
+    private final GiftService giftService;
+
     @PostMapping("/notes")
     @ApiOperation(value = "쪽지 선물하기 api")
-    public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest
-//                                           @ApiIgnore @CurrentUser User user
+    public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest,
+                                           @ApiIgnore @CurrentUser Member member
                                            ){
-
-        return ResponseEntity.ok().build();
+        Long giftNoteId = giftService.createNote(noteRequest, member);
+        return ResponseEntity.ok(giftNoteId);
     }
 
     @PostMapping("/polaroids")

@@ -1,5 +1,8 @@
 package com.twoCube.gifts.dto;
 
+import com.twoCube.couple.domain.Couple;
+import com.twoCube.gifts.domain.GiftNote;
+import com.twoCube.members.domain.Member;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 
@@ -11,4 +14,8 @@ public class NoteRequest {
                     "바쁘다고 밥거르지 말구 잘 챙겨먹어 :)" +
                     "오늘은 날씨가 좀 춥다니까 따뜻하게 입고가구..")
     private String content;
+
+    public GiftNote toEntity(Member member, Couple couple) {
+        return GiftNote.builder().couple(couple).member(member).content(content).build();
+    }
 }

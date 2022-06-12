@@ -14,7 +14,7 @@ import java.util.Collection;
 public class CurrentUserDetails implements UserDetails {
 
     @Delegate
-    private final Member member;
+    private final Member user;
     private final Collection<? extends GrantedAuthority> authorities;
 
     @Override

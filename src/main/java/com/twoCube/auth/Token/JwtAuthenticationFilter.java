@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+
 
 @RequiredArgsConstructor
 @Slf4j
@@ -26,6 +28,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // JWT 토큰의 인증 정보를 현재 쓰레드의 SecurityContext 에 저장하는 역할 수행
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+
+        System.out.println("getting token");
 
         // 1. Request Header 에서 토큰을 꺼냄
         String jwt = resolveToken(request);
@@ -46,8 +50,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     // Request Header 에서 토큰 정보를 꺼내오기
     private String resolveToken(HttpServletRequest request) {
+        System.out.println("resolvinb");
+
+        Enumeration eHeader = request.getHeaderNames();
+        while (eHeader.hasMoreElements()) {
+            String request_Name = (String)eHeader.nextElement();
+            String request_Value = request.getHeader(request_Name);
+            System.out.println("request_Name : " + request_Name + " | request_Value : " + request_Value);
+        }
+
+        System.out.println(request.getHeader("jwt"));
+
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        System.out.println(bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+            System.out.println("success");
             return bearerToken.substring(7);
         }
         log.debug("don'thave");
