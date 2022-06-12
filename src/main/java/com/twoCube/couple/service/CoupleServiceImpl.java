@@ -18,11 +18,32 @@ public class CoupleServiceImpl implements CoupleService{
     @Override
     public Code generateCode(Member member) {
 
-        Couple couple = Couple.builder().code(RandomStringUtils.randomAlphanumeric(5)).build();
+        Couple couple = new Couple();
+        couple.setCode(RandomStringUtils.randomAlphanumeric(5));
         coupleRepository.save(couple);
+
         member.setCouple(couple);
         memberRepository.save(member);
 
         return new Code(couple.getCode());
+    }
+
+    @Override
+    public String validateCode(Code code, Member member) {
+
+        System.out.println("code:" + code.getCode());
+
+        Couple couple = coupleRepository.findByCode(code.getCode());
+
+        if(couple == null){
+            return "fail: code does Not Exist";
+        }
+        if(memberRepository.countByCouple(couple) > 2){
+            return "fail: max num for couple is 2";
+        }
+
+        member.setCouple(couple);
+        memberRepository.save(member);
+        return "success";
     }
 }

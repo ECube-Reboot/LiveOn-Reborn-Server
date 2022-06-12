@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CoupleService {
     Code generateCode(Member member);
+    String validateCode(Code code, Member member);
 }

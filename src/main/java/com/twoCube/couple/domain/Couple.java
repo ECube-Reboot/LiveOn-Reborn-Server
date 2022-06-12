@@ -1,15 +1,15 @@
 package com.twoCube.couple.domain;
 
 import com.twoCube.common.domain.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Builder
+@Setter
 @Getter
+@NoArgsConstructor
 public class Couple extends BaseTimeEntity {
 
     @Id
@@ -20,4 +20,5 @@ public class Couple extends BaseTimeEntity {
     private String code;
 
     private LocalDateTime officialDate;
+
 }

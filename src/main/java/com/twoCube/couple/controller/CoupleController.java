@@ -23,17 +23,19 @@ public class CoupleController {
     @GetMapping("/code")
     @ApiOperation(value = "코드 발급받기 api")
     public ResponseEntity<Code> generateCode(
-                                           @ApiIgnore @CurrentUser Member member
-    ){
+            @ApiIgnore @CurrentUser Member member
+    ) {
         Code code = coupleService.generateCode(member);
         return ResponseEntity.ok(code);
     }
 
     @PostMapping("/code")
     @ApiOperation(value = "코드 검증 api")
-    public ResponseEntity<Long> createNote(@RequestBody Code code
-//                                           @ApiIgnore @CurrentUser User user
-    ){
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> validateCode(@RequestBody Code code,
+                                               @ApiIgnore @CurrentUser Member member
+    ) {
+        System.out.println("controller");
+        String statusMessage = coupleService.validateCode(code, member);
+        return ResponseEntity.ok(statusMessage);
     }
 }
