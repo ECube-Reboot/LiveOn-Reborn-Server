@@ -2,8 +2,9 @@ package com.twoCube.calendar.controller;
 
 import com.twoCube.calendar.dto.AnniversaryRequest;
 
-import com.twoCube.calendar.dto.CalendarResponseDto;
+import com.twoCube.calendar.dto.CalendarResponse;
 import com.twoCube.calendar.dto.DayRequestDto;
+import com.twoCube.calendar.service.CalendarService;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
@@ -18,6 +19,8 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequiredArgsConstructor
 @Api(tags = {"캘린더 API"})
 public class CalendarController {
+
+    private final CalendarService calendarService;
 
     @PostMapping("")
     @ApiOperation(value = "기념일 생성하기 api")
@@ -38,9 +41,9 @@ public class CalendarController {
 
     @GetMapping("")
     @ApiOperation(value = "캘린더 메인 api")
-    public ResponseEntity<CalendarResponseDto> getCalendar(@ApiIgnore @CurrentUser Member member
+    public ResponseEntity<CalendarResponse> getCalendar(@ApiIgnore @CurrentUser Member member
     ) {
-        CalendarResponseDto calendarResponseDto = new CalendarResponseDto();
+        CalendarResponse calendarResponseDto = calendarService.getCalendar(member);
         return ResponseEntity.ok(calendarResponseDto);
     }
 

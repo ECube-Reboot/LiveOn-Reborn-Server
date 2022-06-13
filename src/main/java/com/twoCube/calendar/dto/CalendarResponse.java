@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class CalendarResponseDto {
+public class CalendarResponse {
     private List<EventResponse> eventResponseList;
     private List<UserAudioResponse> audioResponseList;
     private List<UserPolaroidResponse> polaroidResponseList;
