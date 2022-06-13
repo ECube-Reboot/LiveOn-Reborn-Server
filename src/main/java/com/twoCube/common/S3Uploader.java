@@ -41,8 +41,8 @@ public class S3Uploader {
     @Value("${cloud.aws.region.static}")
     private String region;
 
-    @Value("${cloud.aws.s3.polaroidImagePath}")
-    private String polaroidDefaultPath;
+//    @Value("${cloud.aws.s3.polaroidImagePath}")
+//    private String polaroidDefaultPath;
 
     @PostConstruct
     public void setS3Client() {
@@ -102,19 +102,19 @@ public class S3Uploader {
         return Optional.empty();
     }
 
-    public void deleteS3(String imageUrl) {
-        String bucket;
-        String defaultPath;
-
-        bucket = polaroidBucket;
-        defaultPath = polaroidDefaultPath;
-
-
-        try {
-            amazonS3Client.deleteObject(bucket, imageUrl.replace(defaultPath, ""));
-        } catch (AmazonServiceException e) {
-            System.err.println(e.getErrorMessage());
-        }
-        log.info("file deleted");
-    }
+//    public void deleteS3(String imageUrl) {
+//        String bucket;
+//        String defaultPath;
+//
+//        bucket = polaroidBucket;
+//        defaultPath = polaroidDefaultPath;
+//
+//
+//        try {
+//            amazonS3Client.deleteObject(bucket, imageUrl.replace(defaultPath, ""));
+//        } catch (AmazonServiceException e) {
+//            System.err.println(e.getErrorMessage());
+//        }
+//        log.info("file deleted");
+//    }
 }

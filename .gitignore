@@ -32,5 +32,6 @@ previous-compilation-data.bin
 hs_err_pid*
 
 application-realdb.yml
+application-awss3.yml
 
 
