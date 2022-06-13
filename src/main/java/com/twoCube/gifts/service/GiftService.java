@@ -7,7 +7,5 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface GiftService {
-    List<PillListResponse> getPillList();
-    Long createPill(PillRequest pillRequest, Member member);
     Long createPolaroid(MultipartFile polaroid, String content, Member member);
 }

@@ -17,26 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GiftServiceImpl implements GiftService{
 
-    private final GiftFlowerRepository giftFlowerRepository;
-    private final PillRepository pillRepository;
-    private final GiftPillRepository giftPillRepository;
     private final S3Uploader s3Uploader;
     private final GiftPolaroidRepository giftPolaroidRepository;
 
 
-    @Override
-    public List<PillListResponse> getPillList() {
-        return PillListResponse.listFrom(pillRepository.findAll());
-    }
-
-    @Override
-    public Long createPill(PillRequest pillRequest, Member member) {
-        Couple couple = member.getCouple();
-        Pill pill = pillRepository.getById(pillRequest.getPillId());
-        GiftPill giftPill = pillRequest.toEntity(member, couple, pill);
-        giftPillRepository.save(giftPill);
-        return  giftPill.getId();
-    }
 
     @Override
     public Long createPolaroid(MultipartFile polaroid, String comment, Member member) {

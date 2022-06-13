@@ -5,6 +5,7 @@ import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
 import com.twoCube.gifts.service.GiftFlowerService;
 import com.twoCube.gifts.service.GiftNoteService;
+import com.twoCube.gifts.service.GiftPillService;
 import com.twoCube.gifts.service.GiftService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
@@ -28,6 +29,7 @@ public class GiftController {
 
     private final GiftService giftService;
     private final GiftNoteService giftNoteService;
+    private final GiftPillService giftPillService;
     private final GiftFlowerService giftFlowerService;
 
 
@@ -56,14 +58,14 @@ public class GiftController {
     public ResponseEntity<Long> createPill(@RequestBody PillRequest pillRequest,
                                            @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftPillId = giftService.createPill(pillRequest, member);
+        Long giftPillId = giftPillService.createPill(pillRequest, member);
         return ResponseEntity.ok(giftPillId);
     }
 
     @GetMapping("/pills")
     @ApiOperation(value = "영양제 list 호출 api")
     public ResponseEntity<List<PillListResponse>> getPillList() {
-        List<PillListResponse> pillListResponse = giftService.getPillList();
+        List<PillListResponse> pillListResponse = giftPillService.getPillList();
         return ResponseEntity.ok(pillListResponse);
     }
 
