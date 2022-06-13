@@ -17,7 +17,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @RequestMapping("/api/v1/gifts/polaroids")
 @RequiredArgsConstructor
-@Api(tags = {"선물 API"})
+@Api(tags = {"폴라로이드 선물 API"})
 public class GiftPolaroidController {
 
     private final GiftPolaroidService giftPolaroidService;

@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/gifts/pills")
 @RequiredArgsConstructor
-@Api(tags = {"알약 선물 API"})
+@Api(tags = {"영양제 선물 API"})
 public class GiftPillController {
     private final GiftPillService giftPillService;
 
