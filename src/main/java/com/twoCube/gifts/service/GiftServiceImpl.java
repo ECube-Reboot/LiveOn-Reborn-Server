@@ -7,12 +7,16 @@ import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.FlowerRequest;
 import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.dto.NoteRequest;
+import com.twoCube.gifts.dto.PillListResponse;
 import com.twoCube.gifts.repository.FlowerRepository;
 import com.twoCube.gifts.repository.GiftFlowerRepository;
 import com.twoCube.gifts.repository.GiftNoteRepository;
+import com.twoCube.gifts.repository.PillRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ public class GiftServiceImpl implements GiftService{
     private final GiftNoteRepository giftNoteRepository;
     private final FlowerRepository flowerRepository;
     private final GiftFlowerRepository giftFlowerRepository;
+    private final PillRepository pillRepository;
 
     @Override
     public Long createNote(NoteRequest noteRequest, Member member) {
@@ -45,8 +50,7 @@ public class GiftServiceImpl implements GiftService{
     }
 
     @Override
-    public PillLiResponse getRandomFlower(Member member) {
-        Flower flower = flowerRepository.findFlowerByRand();
-        return new FlowerResponse(flower);
+    public List<PillListResponse> getPillList() {
+        return PillListResponse.listFrom(pillRepository.findAll());
     }
 }

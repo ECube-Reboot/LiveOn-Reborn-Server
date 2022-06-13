@@ -56,7 +56,7 @@ public class GiftController {
     @GetMapping("/pills")
     @ApiOperation(value = "영양제 list 호출 api")
     public ResponseEntity<List<PillListResponse>> getPillList() {
-//        List<PillListResponse> pillListResponse = giftService.getPillList();
+        List<PillListResponse> pillListResponse = giftService.getPillList();
         return ResponseEntity.ok(pillListResponse);
     }
 
