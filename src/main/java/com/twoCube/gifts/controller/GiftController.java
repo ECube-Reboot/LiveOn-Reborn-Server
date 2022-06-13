@@ -3,7 +3,7 @@ package com.twoCube.gifts.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
-import com.twoCube.gifts.service.GiftService;
+import com.twoCube.gifts.service.*;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,13 +25,18 @@ import java.util.List;
 public class GiftController {
 
     private final GiftService giftService;
+    private final GiftNoteService giftNoteService;
+    private final GiftPillService giftPillService;
+    private final GiftFlowerService giftFlowerService;
+    private final GiftPolaroidService giftPolaroidService;
+
 
     @PostMapping("/notes")
     @ApiOperation(value = "쪽지 선물하기 api")
     public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest,
                                            @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftNoteId = giftService.createNote(noteRequest, member);
+        Long giftNoteId = giftNoteService.createNote(noteRequest, member);
         return ResponseEntity.ok(giftNoteId);
     }
 
@@ -41,8 +46,7 @@ public class GiftController {
                                                @RequestPart(required = false, value = "comment") String comment,
                                                @ApiIgnore @CurrentUser Member member
     ) {
-        System.out.println("comment " + comment);
-        long giftPolaroidId = giftService.createPolaroid(polaroid, comment, member);
+        long giftPolaroidId = giftPolaroidService.createPolaroid(polaroid, comment, member);
         return ResponseEntity.ok(giftPolaroidId);
     }
 
@@ -51,14 +55,14 @@ public class GiftController {
     public ResponseEntity<Long> createPill(@RequestBody PillRequest pillRequest,
                                            @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftPillId = giftService.createPill(pillRequest, member);
+        Long giftPillId = giftPillService.createPill(pillRequest, member);
         return ResponseEntity.ok(giftPillId);
     }
 
     @GetMapping("/pills")
     @ApiOperation(value = "영양제 list 호출 api")
     public ResponseEntity<List<PillListResponse>> getPillList() {
-        List<PillListResponse> pillListResponse = giftService.getPillList();
+        List<PillListResponse> pillListResponse = giftPillService.getPillList();
         return ResponseEntity.ok(pillListResponse);
     }
 
@@ -67,7 +71,7 @@ public class GiftController {
     public ResponseEntity<FlowerResponse> getFlower(
             @ApiIgnore @CurrentUser Member member
     ) {
-        FlowerResponse flowerResponse = giftService.getRandomFlower(member);
+        FlowerResponse flowerResponse = giftFlowerService.getRandomFlower(member);
         return ResponseEntity.ok(flowerResponse);
     }
 
@@ -76,7 +80,7 @@ public class GiftController {
     public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
                                              @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftFlowerId = giftService.createFlower(flowerRequest, member);
+        Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
         return ResponseEntity.ok(giftFlowerId);
     }
 
