@@ -25,64 +25,6 @@ import java.util.List;
 public class GiftController {
 
     private final GiftService giftService;
-    private final GiftNoteService giftNoteService;
-    private final GiftPillService giftPillService;
-    private final GiftFlowerService giftFlowerService;
-    private final GiftPolaroidService giftPolaroidService;
-
-
-    @PostMapping("/notes")
-    @ApiOperation(value = "쪽지 선물하기 api")
-    public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest,
-                                           @ApiIgnore @CurrentUser Member member
-    ) {
-        Long giftNoteId = giftNoteService.createNote(noteRequest, member);
-        return ResponseEntity.ok(giftNoteId);
-    }
-
-    @PostMapping("/polaroids")
-    @ApiOperation(value = "폴라로이드 선물하기 api")
-    public ResponseEntity<Long> createPolaroid(@RequestPart(required = false) MultipartFile polaroid,
-                                               @RequestPart(required = false, value = "comment") String comment,
-                                               @ApiIgnore @CurrentUser Member member
-    ) {
-        long giftPolaroidId = giftPolaroidService.createPolaroid(polaroid, comment, member);
-        return ResponseEntity.ok(giftPolaroidId);
-    }
-
-    @PostMapping("/pills")
-    @ApiOperation(value = "영양제 선물하기 api")
-    public ResponseEntity<Long> createPill(@RequestBody PillRequest pillRequest,
-                                           @ApiIgnore @CurrentUser Member member
-    ) {
-        Long giftPillId = giftPillService.createPill(pillRequest, member);
-        return ResponseEntity.ok(giftPillId);
-    }
-
-    @GetMapping("/pills")
-    @ApiOperation(value = "영양제 list 호출 api")
-    public ResponseEntity<List<PillListResponse>> getPillList() {
-        List<PillListResponse> pillListResponse = giftPillService.getPillList();
-        return ResponseEntity.ok(pillListResponse);
-    }
-
-    @GetMapping("/flowers")
-    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
-    public ResponseEntity<FlowerResponse> getFlower(
-            @ApiIgnore @CurrentUser Member member
-    ) {
-        FlowerResponse flowerResponse = giftFlowerService.getRandomFlower(member);
-        return ResponseEntity.ok(flowerResponse);
-    }
-
-    @PostMapping("/flowers")
-    @ApiOperation(value = "꽃 선물하기 api")
-    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
-                                             @ApiIgnore @CurrentUser Member member
-    ) {
-        Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
-        return ResponseEntity.ok(giftFlowerId);
-    }
 
     @GetMapping("/main")
     @ApiOperation(value = "선물 메인 api")
