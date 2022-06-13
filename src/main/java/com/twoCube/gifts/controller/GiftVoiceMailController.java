@@ -1,6 +1,7 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.service.GiftVoiceMailService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,13 +20,15 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(tags = {"음성메시지 선물 API"})
 public class GiftVoiceMailController {
 
+    private final GiftVoiceMailService giftVoiceMailService;
+
     @PostMapping("")
     @ApiOperation(value = "음성메시지 선물하기 api")
-    public ResponseEntity<Long> createPolaroid(@RequestPart(required = false) MultipartFile voiceMail,
+    public ResponseEntity<Long> createVoicemail(@RequestPart(required = false) MultipartFile voiceMail,
                                                @RequestPart(required = false) String title,
                                                @ApiIgnore @CurrentUser Member member
     ) {
-//        long giftPolaroidId = giftPolaroidService.createPolaroid(voiceMail, title, member);
-        return ResponseEntity.ok().build();
+        long giftVoiceMailId = giftVoiceMailService.createVoicemail(voiceMail, title, member);
+        return ResponseEntity.ok(giftVoiceMailId);
     }
 }

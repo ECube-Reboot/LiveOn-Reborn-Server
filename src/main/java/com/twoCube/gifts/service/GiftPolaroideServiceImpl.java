@@ -1,5 +1,6 @@
 package com.twoCube.gifts.service;
 
+import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
@@ -23,7 +24,7 @@ public class GiftPolaroideServiceImpl implements GiftPolaroidService {
         Couple couple = member.getCouple();
         GiftPolaroid giftPolaroid = null;
         try {
-            String imageUrl = s3Uploader.upload(polaroid);
+            String imageUrl = s3Uploader.upload(polaroid, EBucketType.polaroid);
             giftPolaroid = GiftPolaroid.builder().comment(comment).couple(couple)
                     .member(member).polaroid(imageUrl).build();
 

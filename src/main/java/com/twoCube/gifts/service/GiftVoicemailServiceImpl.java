@@ -1,5 +1,6 @@
 package com.twoCube.gifts.service;
 
+import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
@@ -27,7 +28,7 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
         GiftVoicemail giftVoicemail = null;
 
         try {
-            String imageUrl = s3Uploader.upload(voicemail);
+            String imageUrl = s3Uploader.upload(voicemail, EBucketType.voicemail);
             giftVoicemail = GiftVoicemail.builder().title(title).couple(couple)
                     .member(member).voicemail(imageUrl).build();
 
