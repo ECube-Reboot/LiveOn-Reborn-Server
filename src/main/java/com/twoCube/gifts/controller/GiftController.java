@@ -3,6 +3,7 @@ package com.twoCube.gifts.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
+import com.twoCube.gifts.service.GiftFlowerService;
 import com.twoCube.gifts.service.GiftNoteService;
 import com.twoCube.gifts.service.GiftService;
 import com.twoCube.members.domain.Member;
@@ -27,6 +28,8 @@ public class GiftController {
 
     private final GiftService giftService;
     private final GiftNoteService giftNoteService;
+    private final GiftFlowerService giftFlowerService;
+
 
     @PostMapping("/notes")
     @ApiOperation(value = "쪽지 선물하기 api")
@@ -69,7 +72,7 @@ public class GiftController {
     public ResponseEntity<FlowerResponse> getFlower(
             @ApiIgnore @CurrentUser Member member
     ) {
-        FlowerResponse flowerResponse = giftService.getRandomFlower(member);
+        FlowerResponse flowerResponse = giftFlowerService.getRandomFlower(member);
         return ResponseEntity.ok(flowerResponse);
     }
 
@@ -78,7 +81,7 @@ public class GiftController {
     public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
                                              @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftFlowerId = giftService.createFlower(flowerRequest, member);
+        Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
         return ResponseEntity.ok(giftFlowerId);
     }
 
