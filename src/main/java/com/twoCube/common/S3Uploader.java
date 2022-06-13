@@ -37,6 +37,8 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.polaroidBucket}")
     private String polaroidBucket;
 
+    @Value("${cloud.aws.s3.voicemailBucket}")
+    private String voicemailBucket;
 
     @Value("${cloud.aws.region.static}")
     private String region;
@@ -54,23 +56,28 @@ public class S3Uploader {
                 .build();
     }
 
-    public String upload(MultipartFile multipartFile) throws IOException {
+    public String upload(MultipartFile multipartFile, EBucketType bucketType) throws IOException {
         File uploadFile = convert(multipartFile)
                 .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
-        return upload(uploadFile);
+        return upload(uploadFile, bucketType);
     }
 
-    private String upload(File uploadFile) {
+    private String upload(File uploadFile, EBucketType bucketType) {
         String fileName = UUID.randomUUID() + "_" + uploadFile.getName();
-        String uploadImageUrl = putS3(uploadFile, fileName);
+        String uploadImageUrl = putS3(uploadFile, fileName, bucketType);
         removeNewFile(uploadFile);
         return uploadImageUrl;
     }
 
-    private String putS3(File uploadFile, String fileName) {
+    private String putS3(File uploadFile, String fileName, EBucketType bucketType) {
         String bucket;
-        bucket = polaroidBucket;
+
+        if (bucketType.equals(EBucketType.polaroid)) {
+            bucket = polaroidBucket;
+        } else {
+            bucket =voicemailBucket;
+        }
 
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();

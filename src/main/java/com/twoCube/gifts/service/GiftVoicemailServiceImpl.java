@@ -4,7 +4,9 @@ import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
+import com.twoCube.gifts.domain.GiftVoicemail;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
+import com.twoCube.gifts.repository.GiftVoicemailRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,24 +16,26 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class GiftPolaroideServiceImpl implements GiftPolaroidService {
+public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
+
     private final S3Uploader s3Uploader;
-    private final GiftPolaroidRepository giftPolaroidRepository;
+    private final GiftVoicemailRepository giftVoicemailRepository;
 
 
     @Override
-    public Long createPolaroid(MultipartFile polaroid, String comment, Member member) {
+    public Long createVoicemail(MultipartFile voicemail, String title, Member member) {
         Couple couple = member.getCouple();
-        GiftPolaroid giftPolaroid = null;
-        try {
-            String imageUrl = s3Uploader.upload(polaroid, EBucketType.polaroid);
-            giftPolaroid = GiftPolaroid.builder().comment(comment).couple(couple)
-                    .member(member).polaroid(imageUrl).build();
+        GiftVoicemail giftVoicemail = null;
 
-            giftPolaroidRepository.save(giftPolaroid);
+        try {
+            String imageUrl = s3Uploader.upload(voicemail, EBucketType.voicemail);
+            giftVoicemail = GiftVoicemail.builder().title(title).couple(couple)
+                    .member(member).voicemail(imageUrl).build();
+
+            giftVoicemailRepository.save(giftVoicemail);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return giftPolaroid.getId();
+        return giftVoicemail.getId();
     }
 }
