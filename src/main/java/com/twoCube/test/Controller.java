@@ -54,6 +54,6 @@ public class Controller {
         System.out.println("print");
         System.out.println(image.getOriginalFilename());
         return ResponseEntity.ok(
-                new TestMultipartDto(image.getOriginalFilename(), content));
+                new TestMultipartDto(image.getContentType(), content));
     }
 }
