@@ -3,9 +3,14 @@ package com.twoCube.gifts.domain;
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.members.domain.Member;
+import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.*;
 
+@Entity
+@Builder
+@Getter
 public class GiftPill extends BaseTimeEntity {
 
     @Id

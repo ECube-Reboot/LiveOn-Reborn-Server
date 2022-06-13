@@ -46,11 +46,11 @@ public class GiftController {
 
     @PostMapping("/pills")
     @ApiOperation(value = "영양제 선물하기 api")
-    public ResponseEntity<Long> createPill(@RequestBody PillRequest pillRequest
-//                                           @ApiIgnore @CurrentUser User user
+    public ResponseEntity<Long> createPill(@RequestBody PillRequest pillRequest,
+                                           @ApiIgnore @CurrentUser Member member
     ) {
-
-        return ResponseEntity.ok().build();
+        Long giftPillId = giftService.createPill(pillRequest, member);
+        return ResponseEntity.ok(giftPillId);
     }
 
     @GetMapping("/pills")
