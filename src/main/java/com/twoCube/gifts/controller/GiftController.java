@@ -61,14 +61,14 @@ public class GiftController {
         return ResponseEntity.ok(pillListResponse);
     }
 
-//    @GetMapping("/flowers")
-//    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
-//    public ResponseEntity<FlowerResponse> getFlower(
-//                                           @ApiIgnore @CurrentUser Member memer
-//    ){
-//        FlowerResponse flowerResponse = giftService.getTodayFlower();
-//        return ResponseEntity.ok(flowerResponse);
-//    }
+    @GetMapping("/flowers")
+    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
+    public ResponseEntity<FlowerResponse> getFlower(
+                                           @ApiIgnore @CurrentUser Member member
+    ){
+        FlowerResponse flowerResponse = giftService.getRandomFlower(member);
+        return ResponseEntity.ok(flowerResponse);
+    }
 
     @PostMapping("/flowers")
     @ApiOperation(value = "꽃 선물하기 api")

@@ -1,5 +1,6 @@
 package com.twoCube.gifts.domain;
 
+import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
 public class Flower {
 
     @Id
