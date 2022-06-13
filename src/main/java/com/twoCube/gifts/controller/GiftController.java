@@ -27,7 +27,7 @@ public class GiftController {
     private final GiftService giftService;
     private final GiftNoteService giftNoteService;
     private final GiftPillService giftPillService;
-    private final GiftFlowerService giftFlowerService;
+//    private final GiftFlowerService giftFlowerService;
     private final GiftPolaroidService giftPolaroidService;
 
 
@@ -64,24 +64,6 @@ public class GiftController {
     public ResponseEntity<List<PillListResponse>> getPillList() {
         List<PillListResponse> pillListResponse = giftPillService.getPillList();
         return ResponseEntity.ok(pillListResponse);
-    }
-
-    @GetMapping("/flowers")
-    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
-    public ResponseEntity<FlowerResponse> getFlower(
-            @ApiIgnore @CurrentUser Member member
-    ) {
-        FlowerResponse flowerResponse = giftFlowerService.getRandomFlower(member);
-        return ResponseEntity.ok(flowerResponse);
-    }
-
-    @PostMapping("/flowers")
-    @ApiOperation(value = "꽃 선물하기 api")
-    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
-                                             @ApiIgnore @CurrentUser Member member
-    ) {
-        Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
-        return ResponseEntity.ok(giftFlowerId);
     }
 
     @GetMapping("/main")
