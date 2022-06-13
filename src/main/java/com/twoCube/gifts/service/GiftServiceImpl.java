@@ -17,24 +17,4 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GiftServiceImpl implements GiftService{
 
-    private final S3Uploader s3Uploader;
-    private final GiftPolaroidRepository giftPolaroidRepository;
-
-
-
-    @Override
-    public Long createPolaroid(MultipartFile polaroid, String comment, Member member) {
-        Couple couple = member.getCouple();
-        GiftPolaroid giftPolaroid = null;
-        try {
-            String imageUrl = s3Uploader.upload(polaroid);
-            giftPolaroid = GiftPolaroid.builder().comment(comment).couple(couple)
-                    .member(member).polaroid(imageUrl).build();
-
-            giftPolaroidRepository.save(giftPolaroid);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return giftPolaroid.getId();
-    }
 }

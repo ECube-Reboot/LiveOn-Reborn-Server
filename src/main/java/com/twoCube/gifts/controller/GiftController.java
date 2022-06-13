@@ -3,10 +3,7 @@ package com.twoCube.gifts.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
-import com.twoCube.gifts.service.GiftFlowerService;
-import com.twoCube.gifts.service.GiftNoteService;
-import com.twoCube.gifts.service.GiftPillService;
-import com.twoCube.gifts.service.GiftService;
+import com.twoCube.gifts.service.*;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +28,7 @@ public class GiftController {
     private final GiftNoteService giftNoteService;
     private final GiftPillService giftPillService;
     private final GiftFlowerService giftFlowerService;
+    private final GiftPolaroidService giftPolaroidService;
 
 
     @PostMapping("/notes")
@@ -48,8 +46,7 @@ public class GiftController {
                                                @RequestPart(required = false, value = "comment") String comment,
                                                @ApiIgnore @CurrentUser Member member
     ) {
-        System.out.println("comment " + comment);
-        long giftPolaroidId = giftService.createPolaroid(polaroid, comment, member);
+        long giftPolaroidId = giftPolaroidService.createPolaroid(polaroid, comment, member);
         return ResponseEntity.ok(giftPolaroidId);
     }
 

@@ -7,5 +7,4 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface GiftService {
-    Long createPolaroid(MultipartFile polaroid, String content, Member member);
 }
