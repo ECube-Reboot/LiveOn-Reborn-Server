@@ -43,4 +43,10 @@ public class GiftServiceImpl implements GiftService{
         GiftFlower giftNoteId = giftFlowerRepository.save(giftFlower);
         return giftNoteId.getId();
     }
+
+    @Override
+    public PillLiResponse getRandomFlower(Member member) {
+        Flower flower = flowerRepository.findFlowerByRand();
+        return new FlowerResponse(flower);
+    }
 }
