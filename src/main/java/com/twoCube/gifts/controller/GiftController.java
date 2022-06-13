@@ -36,12 +36,14 @@ public class GiftController {
     }
 
     @PostMapping("/polaroids")
-    @ApiOperation(value = "폴라로이드 선물하기 api", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperation(value = "폴라로이드 선물하기 api")
     public ResponseEntity<Long> createPolaroid(@RequestPart(required = false) MultipartFile polaroid,
-                                               @RequestPart(required = false) String content
-//                                           @ApiIgnore @CurrentUser User user
+                                               @RequestPart(required = false, value = "comment") String comment,
+                                               @ApiIgnore @CurrentUser Member member
     ) {
-        return ResponseEntity.ok().build();
+        System.out.println("comment " + comment);
+        long giftPolaroidId = giftService.createPolaroid(polaroid, comment, member);
+        return ResponseEntity.ok(giftPolaroidId);
     }
 
     @PostMapping("/pills")
