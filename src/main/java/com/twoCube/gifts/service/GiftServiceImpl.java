@@ -25,13 +25,13 @@ public class GiftServiceImpl implements GiftService{
     private final S3Uploader s3Uploader;
     private final GiftPolaroidRepository giftPolaroidRepository;
 
-    @Override
-    public Long createNote(NoteRequest noteRequest, Member member) {
-        Couple couple = member.getCouple();
-        GiftNote giftNote = noteRequest.toEntity(member, couple);
-        GiftNote giftNoteId = giftNoteRepository.save(giftNote);
-        return giftNoteId.getId();
-    }
+//    @Override
+//    public Long createNote(NoteRequest noteRequest, Member member) {
+//        Couple couple = member.getCouple();
+//        GiftNote giftNote = noteRequest.toEntity(member, couple);
+//        GiftNote giftNoteId = giftNoteRepository.save(giftNote);
+//        return giftNoteId.getId();
+//    }
 
     @Override
     public FlowerResponse getRandomFlower(Member member) {

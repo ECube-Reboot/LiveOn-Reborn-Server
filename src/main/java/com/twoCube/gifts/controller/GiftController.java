@@ -3,6 +3,7 @@ package com.twoCube.gifts.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.*;
+import com.twoCube.gifts.service.GiftNoteService;
 import com.twoCube.gifts.service.GiftService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
@@ -25,13 +26,14 @@ import java.util.List;
 public class GiftController {
 
     private final GiftService giftService;
+    private final GiftNoteService giftNoteService;
 
     @PostMapping("/notes")
     @ApiOperation(value = "쪽지 선물하기 api")
     public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest,
                                            @ApiIgnore @CurrentUser Member member
     ) {
-        Long giftNoteId = giftService.createNote(noteRequest, member);
+        Long giftNoteId = giftNoteService.createNote(noteRequest, member);
         return ResponseEntity.ok(giftNoteId);
     }
 
