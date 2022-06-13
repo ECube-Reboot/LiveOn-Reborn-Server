@@ -25,20 +25,13 @@ import java.util.List;
 public class GiftController {
 
     private final GiftService giftService;
-    private final GiftNoteService giftNoteService;
+//    private final GiftNoteService giftNoteService;
     private final GiftPillService giftPillService;
 //    private final GiftFlowerService giftFlowerService;
     private final GiftPolaroidService giftPolaroidService;
 
 
-    @PostMapping("/notes")
-    @ApiOperation(value = "쪽지 선물하기 api")
-    public ResponseEntity<Long> createNote(@RequestBody NoteRequest noteRequest,
-                                           @ApiIgnore @CurrentUser Member member
-    ) {
-        Long giftNoteId = giftNoteService.createNote(noteRequest, member);
-        return ResponseEntity.ok(giftNoteId);
-    }
+
 
     @PostMapping("/polaroids")
     @ApiOperation(value = "폴라로이드 선물하기 api")

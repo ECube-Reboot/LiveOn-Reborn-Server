@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class GiftFlowerController {
     private final GiftFlowerService giftFlowerService;
 
-    @GetMapping("/flowers")
+    @GetMapping("")
     @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
     public ResponseEntity<FlowerResponse> getFlower(
             @ApiIgnore @CurrentUser Member member
@@ -28,7 +28,7 @@ public class GiftFlowerController {
         return ResponseEntity.ok(flowerResponse);
     }
 
-    @PostMapping("/flowers")
+    @PostMapping("")
     @ApiOperation(value = "꽃 선물하기 api")
     public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
                                              @ApiIgnore @CurrentUser Member member
