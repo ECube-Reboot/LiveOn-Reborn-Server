@@ -51,6 +51,8 @@ public class Controller {
                                                @RequestPart(required = false) String content
 //                                           @ApiIgnore @CurrentUser User user
     ) throws IOException {
+        System.out.println("print");
+        System.out.println(image.getOriginalFilename());
         return ResponseEntity.ok(
                 new TestMultipartDto(image.getOriginalFilename(), content));
     }
