@@ -61,14 +61,14 @@ public class GiftController {
         return ResponseEntity.ok(pillListResponse);
     }
 
-    @GetMapping("/flowers")
-    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
-    public ResponseEntity<FlowerResponse> getFlowerList(
-//                                           @ApiIgnore @CurrentUser User user
-    ){
-        FlowerResponse flowerResponse = new FlowerResponse();
-        return ResponseEntity.ok(flowerResponse);
-    }
+//    @GetMapping("/flowers")
+//    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
+//    public ResponseEntity<FlowerResponse> getFlower(
+//                                           @ApiIgnore @CurrentUser Member memer
+//    ){
+//        FlowerResponse flowerResponse = giftService.getTodayFlower();
+//        return ResponseEntity.ok(flowerResponse);
+//    }
 
     @PostMapping("/flowers")
     @ApiOperation(value = "꽃 선물하기 api")
@@ -83,6 +83,7 @@ public class GiftController {
     public ResponseEntity<MainRequest> getMain(
 //                                           @ApiIgnore @CurrentUser User user
     ){
+        System.out.println("print");
         MainRequest mainRequest = new MainRequest();
         return ResponseEntity.ok().build();
     }

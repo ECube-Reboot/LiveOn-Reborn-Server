@@ -20,4 +20,10 @@ public class GiftServiceImpl implements GiftService{
         GiftNote giftNoteId = giftNoteRepository.save(giftNote);
         return giftNoteId.getId();
     }
+
+//    @Override
+//    public Long getFlower(Member member) {
+//        gift
+//        return giftNoteId.getId();
+//    }
 }
