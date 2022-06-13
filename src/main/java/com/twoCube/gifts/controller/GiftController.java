@@ -72,10 +72,11 @@ public class GiftController {
 
     @PostMapping("/flowers")
     @ApiOperation(value = "꽃 선물하기 api")
-    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest
-//                                           @ApiIgnore @CurrentUser User user
+    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
+                                           @ApiIgnore @CurrentUser Member member
     ){
-        return ResponseEntity.ok().build();
+        Long giftFlowerId = giftService.createFlower(flowerRequest, member);
+        return ResponseEntity.ok(giftFlowerId);
     }
 
     @GetMapping("/main")
