@@ -43,7 +43,7 @@ public class GiftPolaroidController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "폴라로이드 선물보기 api")
-    public ResponseEntity<UserPolaroidResponse> getPolaroidList(
+    public ResponseEntity<UserPolaroidResponse> getPolaroid(
             @PathVariable Long id,
             @ApiIgnore @CurrentUser Member member
     ) {
