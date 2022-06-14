@@ -35,12 +35,4 @@ public class MemberController {
         return ResponseEntity.ok(coupleId);
     }
 
-//    @PostMapping("")
-//    @ApiOperation(value = "꽃 선물하기 api")
-//    public ResponseEntity<Long> createFlower(@RequestBody FlowerRequest flowerRequest,
-//                                             @ApiIgnore @CurrentUser Member member
-//    ) {
-//        Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
-//        return ResponseEntity.ok(giftFlowerId);
-//    }
 }
