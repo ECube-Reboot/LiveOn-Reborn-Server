@@ -1,16 +1,21 @@
 package com.twoCube.gifts.domain;
 
+import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.members.domain.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class GiftVoicemail {
+@Entity
+public class GiftVoicemail extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
