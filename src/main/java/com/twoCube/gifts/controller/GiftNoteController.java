@@ -1,6 +1,10 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.dto.detail.UserNoteResponse;
+import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
+import com.twoCube.gifts.dto.list.GiftMemoResponse;
+import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.request.NoteRequest;
 import com.twoCube.gifts.service.GiftNoteService;
 import com.twoCube.members.domain.Member;
@@ -8,11 +12,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/gifts/notes")
@@ -30,4 +33,23 @@ public class GiftNoteController {
         Long giftNoteId = giftNoteService.createNote(noteRequest, member);
         return ResponseEntity.ok(giftNoteId);
     }
+
+    @GetMapping("")
+    @ApiOperation(value = "쪽지 선물보기 리스트 api")
+    public ResponseEntity<List<GiftMemoResponse>> getMemoList(@ApiIgnore @CurrentUser Member member
+    ) {
+        List<GiftMemoResponse> giftMemoResponseList= giftNoteService.getMemoList(member);
+        return ResponseEntity.ok(giftMemoResponseList);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "쪽지 선물보기 api")
+    public ResponseEntity<UserNoteResponse> getNote(
+            @PathVariable Long id,
+            @ApiIgnore @CurrentUser Member member
+    ) {
+        UserNoteResponse giftNoteResponse= giftNoteService.getNote(id);
+        return ResponseEntity.ok(giftNoteResponse);
+    }
+
 }
