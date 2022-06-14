@@ -1,11 +1,13 @@
 package com.twoCube.calendar.service;
 
 import com.twoCube.calendar.domain.Event;
+import com.twoCube.calendar.dto.AnniversaryRequest;
 import com.twoCube.calendar.dto.CalendarRequest;
 import com.twoCube.calendar.dto.CalendarResponse;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.*;
+import com.twoCube.gifts.dto.FlowerRequest;
 import com.twoCube.gifts.repository.*;
 import com.twoCube.members.domain.Member;
 import lombok.AllArgsConstructor;
@@ -49,5 +51,15 @@ public class CalendarServiceImpl implements CalendarService{
         List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         return CalendarResponse.from(events, giftPills,
                 giftFlowers, giftPolaroids, giftNotes, giftVoicemails);
+    }
+
+    @Override
+    public Long addEvent(AnniversaryRequest anniversaryRequest, Member member) {
+        Couple couple = member.getCouple();
+        Event event = Event.builder().eventDate(anniversaryRequest.getDate())
+                .couple(couple).icon(anniversaryRequest.getIcon())
+                .memo(anniversaryRequest.getMemo()).name(anniversaryRequest.getName()).build();
+        eventRepository.save(event);
+        return event.getId();
     }
 }

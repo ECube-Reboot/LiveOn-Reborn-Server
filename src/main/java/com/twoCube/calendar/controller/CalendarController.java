@@ -11,6 +11,7 @@ import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.common.reflection.XMember;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +29,11 @@ public class CalendarController {
 
     @PostMapping("")
     @ApiOperation(value = "기념일 생성하기 api")
-    public ResponseEntity<Long> createNote(@RequestBody AnniversaryRequest anniversaryRequest
-//                                           @ApiIgnore @CurrentUser User user
+    public ResponseEntity<Long> createNote(@RequestBody AnniversaryRequest anniversaryRequest,
+                                           @ApiIgnore @CurrentUser Member member
     ) {
-        return ResponseEntity.ok().build();
+        Long eventId = calendarService.addEvent(anniversaryRequest, member);
+        return ResponseEntity.ok(eventId);
     }
 
     @GetMapping("/day")

@@ -2,13 +2,19 @@ package com.twoCube.calendar.domain;
 
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Entity
 public class Event extends BaseTimeEntity {
 
     @Id
