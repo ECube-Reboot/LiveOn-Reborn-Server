@@ -3,6 +3,9 @@ package com.twoCube.gifts.service;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.domain.GiftPolaroid;
+import com.twoCube.gifts.domain.GiftVoicemail;
+import com.twoCube.gifts.dto.detail.UserAudioResponse;
+import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.list.GiftMemoResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.request.NoteRequest;
@@ -32,5 +35,12 @@ public class GiftNoteServiceImpl implements  GiftNoteService{
         List<GiftNote> giftMemoList =
                 giftNoteRepository.findAllByCouple(member.getCouple());
         return GiftMemoResponse.listFrom(giftMemoList);
+    }
+
+    @Override
+    public UserNoteResponse getNote(Long id) {
+        GiftNote giftNote =
+                giftNoteRepository.getById(id);
+        return UserNoteResponse.from(giftNote);
     }
 }

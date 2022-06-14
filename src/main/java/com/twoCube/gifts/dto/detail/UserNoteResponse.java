@@ -4,12 +4,15 @@ import com.twoCube.gifts.domain.GiftNote;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
 @Builder
 public class UserNoteResponse {
+
+    private LocalDate createdAt;
     private String content;
     private long noteId;
     private String senderName;
@@ -18,6 +21,7 @@ public class UserNoteResponse {
 
         return UserNoteResponse.builder()
                 .content(giftNote.getContent())
+                .createdAt(giftNote.getCreatedAt().toLocalDate())
                 .noteId(giftNote.getId())
                 .senderName(giftNote.getMember().getNickName())
                 .build();

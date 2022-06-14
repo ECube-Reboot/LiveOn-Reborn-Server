@@ -1,6 +1,8 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.dto.detail.UserNoteResponse;
+import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
 import com.twoCube.gifts.dto.list.GiftMemoResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.request.NoteRequest;
@@ -39,4 +41,15 @@ public class GiftNoteController {
         List<GiftMemoResponse> giftMemoResponseList= giftNoteService.getMemoList(member);
         return ResponseEntity.ok(giftMemoResponseList);
     }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "쪽지 선물보기 api")
+    public ResponseEntity<UserNoteResponse> getNote(
+            @PathVariable Long id,
+            @ApiIgnore @CurrentUser Member member
+    ) {
+        UserNoteResponse giftNoteResponse= giftNoteService.getNote(id);
+        return ResponseEntity.ok(giftNoteResponse);
+    }
+
 }
