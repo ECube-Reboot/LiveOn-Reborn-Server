@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 @Builder
 public class EventResponse {
     private Long id;
-    private String icon;
-    private String name;
-    private String memo;
+    private String emoji;
+    private String eventTitle;
+    private String eventMemo;
     private LocalDate eventDate;
 
     public static EventResponse from(Event event) {
 
         return EventResponse.builder()
                 .id(event.getId())
-                .icon(event.getIcon())
-                .name(event.getName())
-                .memo(event.getMemo())
+                .emoji(event.getIcon())
+                .eventTitle(event.getName())
+                .eventMemo(event.getMemo())
                 .eventDate(event.getEventDate())
                 .build();
     }
