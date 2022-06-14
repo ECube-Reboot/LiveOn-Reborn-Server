@@ -2,6 +2,7 @@ package com.twoCube.members.domain;
 
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
+import io.micrometer.core.lang.Nullable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,13 +29,10 @@ public class Member extends BaseTimeEntity {
 
     private String name;
 
-    private String refreshToken;
-
-    private String birthDay;
-
     private String socialId;
 
     @ManyToOne
+    @Nullable
     @JoinColumn(name="couple_id")
     private Couple couple;
 
