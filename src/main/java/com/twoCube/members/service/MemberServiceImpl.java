@@ -4,6 +4,7 @@ import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.dto.MemberInfoRequest;
+import com.twoCube.members.dto.ProfileRequest;
 import com.twoCube.members.dto.ProfileResponse;
 import com.twoCube.members.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,13 @@ public class MemberServiceImpl implements MemberService {
                 .collect(Collectors.toList());
 
         return new ProfileResponse(member, partner.get(0), eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple()));
+    }
+
+    @Override
+    public ProfileResponse updateProfile(Member member, ProfileRequest profileRequest) {
+        member.setNickName(profileRequest.getNickName());
+        memberRepository.save(member);
+        ProfileResponse profileResponse = getProfile(member);
+        return profileResponse;
     }
 }
