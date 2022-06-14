@@ -4,6 +4,7 @@ import com.twoCube.gifts.domain.GiftVoicemail;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +14,14 @@ public class UserAudioResponse {
     private String voiceMail;
     private String title;
     private long voiceMailId;
+    private LocalDate createdAt;
+    private String userNickName;
 
     public static UserAudioResponse from(GiftVoicemail giftVoicemail) {
 
         return UserAudioResponse.builder()
+                .createdAt(giftVoicemail.getCreatedAt().toLocalDate())
+                .userNickName(giftVoicemail.getMember().getNickName())
                 .voiceMailId(giftVoicemail.getId())
                 .title(giftVoicemail.getTitle())
                 .voiceMail(giftVoicemail.getVoicemail())
