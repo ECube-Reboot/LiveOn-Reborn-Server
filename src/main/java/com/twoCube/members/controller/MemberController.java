@@ -36,8 +36,7 @@ public class MemberController {
     @GetMapping("")
     @ApiOperation(value = "프로필 보기 api")
     public ResponseEntity<ProfileResponse> getProfile(@ApiIgnore @CurrentUser Member member) {
-//        Long coupleId = memberService.getProfile(member);
-        ProfileResponse profileResponse = new ProfileResponse();
+        ProfileResponse profileResponse = memberService.getProfile(member);
         return ResponseEntity.ok(profileResponse);
     }
 
