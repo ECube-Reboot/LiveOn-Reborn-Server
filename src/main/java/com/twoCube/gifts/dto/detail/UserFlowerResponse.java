@@ -1,7 +1,5 @@
-package com.twoCube.gifts.dto;
+package com.twoCube.gifts.dto.detail;
 
-import com.twoCube.calendar.domain.Event;
-import com.twoCube.calendar.dto.EventResponse;
 import com.twoCube.gifts.domain.GiftFlower;
 import lombok.Builder;
 import lombok.Getter;

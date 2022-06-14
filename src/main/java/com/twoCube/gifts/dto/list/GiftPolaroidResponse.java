@@ -1,7 +1,6 @@
-package com.twoCube.gifts.dto;
+package com.twoCube.gifts.dto.list;
 
 import com.twoCube.gifts.domain.GiftPolaroid;
-import com.twoCube.gifts.domain.Pill;
 import lombok.Builder;
 import lombok.Getter;
 

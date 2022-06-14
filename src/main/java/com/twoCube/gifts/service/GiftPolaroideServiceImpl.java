@@ -4,7 +4,8 @@ import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
-import com.twoCube.gifts.dto.GiftPolaroidResponse;
+import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
+import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +39,17 @@ public class GiftPolaroideServiceImpl implements GiftPolaroidService {
     }
 
     @Override
-    public List<GiftPolaroidResponse> getPolaroidList(Member member){
+    public List<GiftPolaroidResponse> getPolaroidList(Member member) {
         List<GiftPolaroid> giftPolaroidList =
                 giftPolaroidRepository.findAllByCouple(member.getCouple());
         return GiftPolaroidResponse.listFrom(giftPolaroidList);
+    }
+
+    @Override
+    public UserPolaroidResponse getPolaroid(Long id) {
+        GiftPolaroid giftPolaroid =
+                giftPolaroidRepository.getById(id);
+        return UserPolaroidResponse.from(giftPolaroid);
     }
 }
 

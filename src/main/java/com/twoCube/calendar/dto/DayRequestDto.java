@@ -1,6 +1,6 @@
 package com.twoCube.calendar.dto;
 
-import com.twoCube.gifts.dto.*;
+import com.twoCube.gifts.dto.detail.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
