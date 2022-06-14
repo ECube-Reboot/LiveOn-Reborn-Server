@@ -44,7 +44,7 @@ public class GiftVoiceMailController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "폴라로이드 선물보기 api")
+    @ApiOperation(value = "음성메시지 선물보기 api")
     public ResponseEntity<UserAudioResponse> getPolaroidList(
             @PathVariable Long id,
             @ApiIgnore @CurrentUser Member member
