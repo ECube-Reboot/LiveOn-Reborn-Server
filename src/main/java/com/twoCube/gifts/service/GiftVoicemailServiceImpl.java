@@ -5,6 +5,8 @@ import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
+import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
+import com.twoCube.gifts.dto.list.GiftVoiceMailResponse;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
 import com.twoCube.gifts.repository.GiftVoicemailRepository;
 import com.twoCube.members.domain.Member;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +40,12 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
             e.printStackTrace();
         }
         return giftVoicemail.getId();
+    }
+
+    @Override
+    public List<GiftVoiceMailResponse> getVoiceMailList(Member member) {
+        List<GiftVoicemail> giftVoicemailList =
+                giftVoicemailRepository.findAllByCouple(member.getCouple());
+        return GiftVoiceMailResponse.listFrom(giftVoicemailList);
     }
 }
