@@ -1,7 +1,7 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
-import com.twoCube.gifts.dto.NoteRequest;
+import com.twoCube.gifts.dto.request.NoteRequest;
 import com.twoCube.gifts.service.GiftNoteService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;

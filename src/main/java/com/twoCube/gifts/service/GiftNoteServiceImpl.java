@@ -2,7 +2,7 @@ package com.twoCube.gifts.service;
 
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftNote;
-import com.twoCube.gifts.dto.NoteRequest;
+import com.twoCube.gifts.dto.request.NoteRequest;
 import com.twoCube.gifts.repository.GiftNoteRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
-import com.twoCube.gifts.dto.FlowerRequest;
+import com.twoCube.gifts.dto.request.FlowerRequest;
 import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.service.GiftFlowerService;
 import com.twoCube.members.domain.Member;

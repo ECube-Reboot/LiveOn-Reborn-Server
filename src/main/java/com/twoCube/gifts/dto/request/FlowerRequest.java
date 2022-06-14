@@ -1,4 +1,4 @@
-package com.twoCube.gifts.dto;
+package com.twoCube.gifts.dto.request;
 
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.Flower;

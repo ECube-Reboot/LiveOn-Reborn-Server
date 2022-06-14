@@ -1,4 +1,4 @@
-package com.twoCube.gifts.dto;
+package com.twoCube.gifts.dto.request;
 
 import lombok.Getter;
 

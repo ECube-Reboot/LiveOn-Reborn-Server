@@ -3,7 +3,6 @@ package com.twoCube.couple.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.couple.dto.Code;
 import com.twoCube.couple.service.CoupleService;
-import com.twoCube.gifts.dto.NoteRequest;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

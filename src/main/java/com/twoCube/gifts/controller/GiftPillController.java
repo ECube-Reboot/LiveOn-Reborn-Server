@@ -2,7 +2,7 @@ package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.dto.PillListResponse;
-import com.twoCube.gifts.dto.PillRequest;
+import com.twoCube.gifts.dto.request.PillRequest;
 import com.twoCube.gifts.service.GiftPillService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
