@@ -41,12 +41,12 @@ public class CalendarServiceImpl implements CalendarService{
         LocalDateTime endDate = calendarRequest.withDayOfMonth(start.lengthOfMonth()).atTime(LocalTime.MAX);
 
 
-        List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThan(start, end);
-        List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThan(startDate, endDate);
-        List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThan(startDate, endDate);
-        List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThan(startDate, endDate);
-        List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThan(startDate, endDate);
-        List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThan(startDate, endDate);
+        List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(start, end, member.getCouple());
+        List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         return CalendarResponse.from(events, giftPills,
                 giftFlowers, giftPolaroids, giftNotes, giftVoicemails);
     }

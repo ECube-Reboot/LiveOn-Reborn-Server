@@ -1,5 +1,7 @@
 package com.twoCube.gifts.repository;
 
+import com.sun.xml.bind.v2.runtime.output.C14nXmlOutput;
+import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +13,5 @@ import java.util.List;
 
 @Repository
 public interface GiftPolaroidRepository extends JpaRepository<GiftPolaroid, Long> {
-    List<GiftPolaroid> findAllByCreatedAtGreaterThanAndCreatedAtLessThan(LocalDateTime start, LocalDateTime end);
+    List<GiftPolaroid> findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
 }
