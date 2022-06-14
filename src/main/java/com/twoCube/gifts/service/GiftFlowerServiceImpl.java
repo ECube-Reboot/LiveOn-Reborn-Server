@@ -3,7 +3,7 @@ package com.twoCube.gifts.service;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.Flower;
 import com.twoCube.gifts.domain.GiftFlower;
-import com.twoCube.gifts.dto.FlowerRequest;
+import com.twoCube.gifts.dto.request.FlowerRequest;
 import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.repository.FlowerRepository;
 import com.twoCube.gifts.repository.GiftFlowerRepository;

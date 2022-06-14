@@ -2,19 +2,14 @@ package com.twoCube.calendar.service;
 
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.dto.AnniversaryRequest;
-import com.twoCube.calendar.dto.CalendarRequest;
 import com.twoCube.calendar.dto.CalendarResponse;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.*;
-import com.twoCube.gifts.dto.FlowerRequest;
 import com.twoCube.gifts.repository.*;
 import com.twoCube.members.domain.Member;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,27 +1,31 @@
-package com.twoCube.gifts.dto;
+package com.twoCube.gifts.dto.detail;
 
-import com.twoCube.calendar.domain.Event;
-import com.twoCube.calendar.dto.EventResponse;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
 @Builder
 public class UserPolaroidResponse {
-    private String polaroidImage;
+
+    private String giftPolaroidImage;
+    private LocalDate createdAt;
+    private String userNickName;
     private long polaroidId;
     private String comment;
 
     public static UserPolaroidResponse from(GiftPolaroid giftPolaroid) {
 
         return UserPolaroidResponse.builder()
-                .polaroidImage(giftPolaroid.getPolaroid())
+                .giftPolaroidImage(giftPolaroid.getPolaroid())
                 .polaroidId(giftPolaroid.getId())
+                .userNickName(giftPolaroid.getMember().getNickName())
                 .comment(giftPolaroid.getComment())
+                .createdAt(giftPolaroid.getCreatedAt().toLocalDate())
                 .build();
     }
 

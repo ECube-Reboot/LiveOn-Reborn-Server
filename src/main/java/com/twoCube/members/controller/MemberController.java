@@ -2,7 +2,6 @@ package com.twoCube.members.controller;
 
 
 import com.twoCube.common.annotation.CurrentUser;
-import com.twoCube.gifts.dto.FlowerRequest;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.dto.MemberInfoRequest;
 import com.twoCube.members.dto.ProfileRequest;

@@ -4,7 +4,7 @@ import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPill;
 import com.twoCube.gifts.domain.Pill;
 import com.twoCube.gifts.dto.PillListResponse;
-import com.twoCube.gifts.dto.PillRequest;
+import com.twoCube.gifts.dto.request.PillRequest;
 import com.twoCube.gifts.repository.GiftPillRepository;
 import com.twoCube.gifts.repository.PillRepository;
 import com.twoCube.members.domain.Member;

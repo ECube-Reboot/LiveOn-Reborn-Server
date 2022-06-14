@@ -2,7 +2,7 @@ package com.twoCube.calendar.dto;
 
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.gifts.domain.*;
-import com.twoCube.gifts.dto.*;
+import com.twoCube.gifts.dto.detail.*;
 import lombok.Builder;
 import lombok.Getter;
 

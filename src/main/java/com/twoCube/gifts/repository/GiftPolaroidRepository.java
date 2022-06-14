@@ -14,4 +14,5 @@ import java.util.List;
 @Repository
 public interface GiftPolaroidRepository extends JpaRepository<GiftPolaroid, Long> {
     List<GiftPolaroid> findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
+    List<GiftPolaroid> findAllByCouple(Couple couple);
 }
