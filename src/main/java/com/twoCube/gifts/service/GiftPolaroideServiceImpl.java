@@ -4,6 +4,7 @@ import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
+import com.twoCube.gifts.dto.GiftPolaroidResponse;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +36,12 @@ public class GiftPolaroideServiceImpl implements GiftPolaroidService {
         }
         return giftPolaroid.getId();
     }
+
+    @Override
+    public List<GiftPolaroidResponse> getPolaroidList(Member member){
+        List<GiftPolaroid> giftPolaroidList =
+                giftPolaroidRepository.findAllByCouple(member.getCouple());
+        return GiftPolaroidResponse.listFrom(giftPolaroidList);
+    }
 }
+
