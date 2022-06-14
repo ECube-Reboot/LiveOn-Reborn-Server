@@ -1,33 +1,33 @@
-package com.twoCube.gifts.domain;
+package com.twoCube.calendar.domain;
 
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
-import com.twoCube.members.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-public class GiftVoicemail extends BaseTimeEntity {
+public class Event extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private String title;
+    private String name;
 
-    private String voicemail;
+    private LocalDate eventDate;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private String memo;
+
+    private String icon;
 
     @ManyToOne
     @JoinColumn(name = "couple_id")

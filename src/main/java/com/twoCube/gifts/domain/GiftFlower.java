@@ -3,13 +3,17 @@ package com.twoCube.gifts.domain;
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.members.domain.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Entity
 public class GiftFlower extends BaseTimeEntity {
 
@@ -32,4 +36,5 @@ public class GiftFlower extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name="flower_id")
     private Flower flower;
+
 }
