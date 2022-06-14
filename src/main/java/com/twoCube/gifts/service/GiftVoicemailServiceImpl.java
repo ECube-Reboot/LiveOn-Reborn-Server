@@ -5,6 +5,8 @@ import com.twoCube.common.S3Uploader;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
+import com.twoCube.gifts.dto.detail.UserAudioResponse;
+import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.list.GiftVoiceMailResponse;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
@@ -47,5 +49,12 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
         List<GiftVoicemail> giftVoicemailList =
                 giftVoicemailRepository.findAllByCouple(member.getCouple());
         return GiftVoiceMailResponse.listFrom(giftVoicemailList);
+    }
+
+    @Override
+    public UserAudioResponse getVoiceMail(Long id) {
+        GiftVoicemail giftVoicemail =
+                giftVoicemailRepository.getById(id);
+        return UserAudioResponse.from(giftVoicemail);
     }
 }

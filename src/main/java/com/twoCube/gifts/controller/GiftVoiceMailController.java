@@ -1,6 +1,8 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.dto.detail.UserAudioResponse;
+import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.list.GiftVoiceMailResponse;
 import com.twoCube.gifts.service.GiftVoiceMailService;
@@ -39,5 +41,15 @@ public class GiftVoiceMailController {
     ) {
         List<GiftVoiceMailResponse> giftVoiceMailResponseList = giftVoiceMailService.getVoiceMailList(member);
         return ResponseEntity.ok(giftVoiceMailResponseList);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "폴라로이드 선물보기 api")
+    public ResponseEntity<UserAudioResponse> getPolaroidList(
+            @PathVariable Long id,
+            @ApiIgnore @CurrentUser Member member
+    ) {
+        UserAudioResponse giftVoiceMailResponse = giftVoiceMailService.getVoiceMail(id);
+        return ResponseEntity.ok(giftVoiceMailResponse);
     }
 }
