@@ -5,15 +5,13 @@ import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.dto.FlowerRequest;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.dto.MemberInfoRequest;
+import com.twoCube.members.dto.ProfileResponse;
 import com.twoCube.members.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -33,6 +31,14 @@ public class MemberController {
         System.out.println(memberInfoRequest.getBirthDay());
         Long coupleId = memberService.updateMemberInfo(member, memberInfoRequest);
         return ResponseEntity.ok(coupleId);
+    }
+
+    @GetMapping("")
+    @ApiOperation(value = "프로필 보기 api")
+    public ResponseEntity<ProfileResponse> getProfile(@ApiIgnore @CurrentUser Member member) {
+//        Long coupleId = memberService.getProfile(member);
+        ProfileResponse profileResponse = new ProfileResponse();
+        return ResponseEntity.ok(profileResponse);
     }
 
 }
