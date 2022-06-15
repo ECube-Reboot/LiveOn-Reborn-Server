@@ -1,10 +1,7 @@
 package com.twoCube.calendar.controller;
 
-import com.twoCube.calendar.dto.AnniversaryRequest;
+import com.twoCube.calendar.dto.*;
 
-import com.twoCube.calendar.dto.CalendarRequest;
-import com.twoCube.calendar.dto.CalendarResponse;
-import com.twoCube.calendar.dto.DayRequestDto;
 import com.twoCube.calendar.service.CalendarService;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.members.domain.Member;
@@ -38,18 +35,19 @@ public class CalendarController {
 
     @GetMapping("/day")
     @ApiOperation(value = "하루 보기 api")
-    public ResponseEntity<DayRequestDto> getDayGift(
-//                                           @ApiIgnore @CurrentUser User user
+    public ResponseEntity<DayResponse> getDayGift(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate calendarRequest,
+            @ApiIgnore @CurrentUser Member member
     ) {
-        DayRequestDto dayRequest = new DayRequestDto();
-        return ResponseEntity.ok(dayRequest);
+        DayResponse dayResponse = calendarService.getDay(member,calendarRequest);
+        return ResponseEntity.ok(dayResponse);
     }
 
     @GetMapping("")
     @ApiOperation(value = "캘린더 메인 api")
     public ResponseEntity<CalendarResponse> getCalendar(@ApiIgnore @CurrentUser Member member,
                                                         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate calendarRequest
-                                                        ) {
+    ) {
         CalendarResponse calendarResponseDto = calendarService.getCalendar(member, calendarRequest);
         return ResponseEntity.ok(calendarResponseDto);
     }
