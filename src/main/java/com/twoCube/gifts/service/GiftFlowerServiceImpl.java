@@ -4,6 +4,8 @@ import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.Flower;
 import com.twoCube.gifts.domain.GiftFlower;
 import com.twoCube.gifts.domain.GiftNote;
+import com.twoCube.gifts.dto.detail.UserFlowerResponse;
+import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.list.GiftFlowerResponse;
 import com.twoCube.gifts.dto.list.GiftMemoResponse;
 import com.twoCube.gifts.dto.request.FlowerRequest;
@@ -43,5 +45,12 @@ public class GiftFlowerServiceImpl implements GiftFlowerService {
         List<GiftFlower> giftFlowerList =
                 giftFlowerRepository.findAllByCouple(member.getCouple());
         return GiftFlowerResponse.listFrom(giftFlowerList);
+    }
+
+    @Override
+    public UserFlowerResponse getFlower(Long id) {
+        GiftFlower giftFlower =
+                giftFlowerRepository.getById(id);
+        return UserFlowerResponse.from(giftFlower);
     }
 }
