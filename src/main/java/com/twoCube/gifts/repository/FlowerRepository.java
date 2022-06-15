@@ -9,4 +9,5 @@ public interface FlowerRepository extends JpaRepository<Flower, Long> {
     @Query(value="SELECT *  FROM flower ORDER BY rand() LIMIT 1"
             ,nativeQuery=true)
     Flower findFlowerByRand();
+
 }
