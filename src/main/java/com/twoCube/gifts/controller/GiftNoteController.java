@@ -51,5 +51,4 @@ public class GiftNoteController {
         UserNoteResponse giftNoteResponse= giftNoteService.getNote(id);
         return ResponseEntity.ok(giftNoteResponse);
     }
-
 }
