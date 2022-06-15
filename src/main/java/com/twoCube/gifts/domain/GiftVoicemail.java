@@ -25,6 +25,8 @@ public class GiftVoicemail extends BaseTimeEntity {
 
     private String voicemail;
 
+    private boolean userChecked;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
