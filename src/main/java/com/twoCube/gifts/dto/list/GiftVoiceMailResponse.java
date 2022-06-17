@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 public class GiftVoiceMailResponse {
     private Long giftVoiceMailId;
-//    private String giftVoiceMail;
+    private String giftVoiceMailDuration;
     private String title;
     private String createdAt;
     private String userNickName;
@@ -27,6 +27,7 @@ public class GiftVoiceMailResponse {
         return GiftVoiceMailResponse.builder()
                 .giftVoiceMailId(giftVoiceMail.getId())
                 .title(giftVoiceMail.getTitle())
+                .giftVoiceMailDuration(giftVoiceMail.getDuration())
                 .createdAt(giftVoiceMail.getCreatedAt()
                         .format(DateTimeFormatter.ofPattern("yyMMdd")))
                 .userNickName(giftVoiceMail.getMember().getNickName())

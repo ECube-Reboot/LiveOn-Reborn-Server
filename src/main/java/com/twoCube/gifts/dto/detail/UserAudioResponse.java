@@ -16,6 +16,7 @@ public class UserAudioResponse {
     private long voiceMailId;
     private LocalDate createdAt;
     private String userNickName;
+    private String giftVoiceMailDuration;
 
     public static UserAudioResponse from(GiftVoicemail giftVoicemail) {
 
@@ -23,6 +24,7 @@ public class UserAudioResponse {
                 .createdAt(giftVoicemail.getCreatedAt().toLocalDate())
                 .userNickName(giftVoicemail.getMember().getNickName())
                 .voiceMailId(giftVoicemail.getId())
+                .giftVoiceMailDuration(giftVoicemail.getDuration())
                 .title(giftVoicemail.getTitle())
                 .voiceMail(giftVoicemail.getVoicemail())
                 .build();
