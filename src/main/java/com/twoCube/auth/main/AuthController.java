@@ -19,6 +19,13 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @ApiOperation(value = "로그인 및 회원가입 api")
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> getTokens(@RequestBody AuthRequest authRequest){
+        AuthResponse authResponse = authService.signUpOrLogIn(authRequest);
+        return ResponseEntity.ok(authResponse);
+    }
+
     @ApiOperation(value= "토큰 재발급")
     @PostMapping("/reissue")
     public ResponseEntity<TokenReissueDto> reissue(@RequestBody TokenReissueDto tokenReissueRequest) {
