@@ -27,7 +27,7 @@ public class GiftPolaroideServiceImpl implements GiftPolaroidService {
         Couple couple = member.getCouple();
         GiftPolaroid giftPolaroid = null;
         try {
-            String imageUrl = s3Uploader.upload(polaroid, EBucketType.polaroid);
+            String imageUrl = s3Uploader.multipartFileUpload(polaroid, EBucketType.polaroid);
             giftPolaroid = GiftPolaroid.builder().comment(comment).couple(couple)
                     .member(member).polaroid(imageUrl).build();
 

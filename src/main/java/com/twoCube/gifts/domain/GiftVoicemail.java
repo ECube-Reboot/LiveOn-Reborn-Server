@@ -25,6 +25,8 @@ public class GiftVoicemail extends BaseTimeEntity {
 
     private String voicemail;
 
+    private String duration;
+
     private boolean userChecked;
 
     @ManyToOne
