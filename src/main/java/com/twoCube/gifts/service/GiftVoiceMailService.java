@@ -10,5 +10,5 @@ import java.util.List;
 public interface GiftVoiceMailService {
     Long createVoicemail(MultipartFile voicemail, String title, String voiceMailDuration, Member member);
     List<GiftVoiceMailResponse> getVoiceMailList(Member member);
-    UserAudioResponse getVoiceMail(Long id);
+    UserAudioResponse getVoiceMail(Long id, Member member);
 }

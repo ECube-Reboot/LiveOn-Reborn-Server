@@ -44,7 +44,6 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
                     .duration(duration).member(member).voicemail(imageUrl).build();
 
             giftVoicemailRepository.save(giftVoicemail);
-            System.out.println("success fully saved");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,13 +55,13 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
     public List<GiftVoiceMailResponse> getVoiceMailList(Member member) {
         List<GiftVoicemail> giftVoicemailList =
                 giftVoicemailRepository.findAllByCouple(member.getCouple());
-        return GiftVoiceMailResponse.listFrom(giftVoicemailList);
+        return GiftVoiceMailResponse.listFrom(giftVoicemailList, member);
     }
 
     @Override
-    public UserAudioResponse getVoiceMail(Long id) {
+    public UserAudioResponse getVoiceMail(Long id, Member member) {
         GiftVoicemail giftVoicemail =
                 giftVoicemailRepository.getById(id);
-        return UserAudioResponse.from(giftVoicemail);
+        return UserAudioResponse.from(giftVoicemail, member);
     }
 }

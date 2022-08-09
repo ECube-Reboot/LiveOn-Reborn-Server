@@ -2,6 +2,7 @@ package com.twoCube.gifts.dto.list;
 
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
+import com.twoCube.members.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,8 +21,9 @@ public class GiftVoiceMailResponse {
     private String title;
     private String createdAt;
     private String userNickName;
+    private boolean currentUser;
 
-    public static GiftVoiceMailResponse from(GiftVoicemail giftVoiceMail) {
+    public static GiftVoiceMailResponse from(GiftVoicemail giftVoiceMail, Member member) {
         DateFormat formatter = new SimpleDateFormat("yyMMdd");
 
         return GiftVoiceMailResponse.builder()
@@ -31,12 +33,13 @@ public class GiftVoiceMailResponse {
                 .createdAt(giftVoiceMail.getCreatedAt()
                         .format(DateTimeFormatter.ofPattern("yyMMdd")))
                 .userNickName(giftVoiceMail.getMember().getNickName())
+                .currentUser(giftVoiceMail.getMember().equals(member))
                 .build();
     }
 
-    public static List<GiftVoiceMailResponse> listFrom(List<GiftVoicemail> giftVoicemailList) {
+    public static List<GiftVoiceMailResponse> listFrom(List<GiftVoicemail> giftVoicemailList, Member member) {
         return giftVoicemailList.stream()
-                .map(GiftVoiceMailResponse::from)
+                .map(giftVoicemail -> from(giftVoicemail, member))
                 .collect(Collectors.toList());
     }
 }

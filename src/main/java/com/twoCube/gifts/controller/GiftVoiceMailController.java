@@ -50,7 +50,7 @@ public class GiftVoiceMailController {
             @PathVariable Long id,
             @ApiIgnore @CurrentUser Member member
     ) {
-        UserAudioResponse giftVoiceMailResponse = giftVoiceMailService.getVoiceMail(id);
+        UserAudioResponse giftVoiceMailResponse = giftVoiceMailService.getVoiceMail(id, member);
         return ResponseEntity.ok(giftVoiceMailResponse);
     }
 }
