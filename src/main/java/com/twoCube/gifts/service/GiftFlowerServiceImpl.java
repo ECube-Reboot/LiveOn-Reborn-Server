@@ -7,7 +7,6 @@ import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.detail.UserFlowerResponse;
 import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.list.GiftFlowerResponse;
-import com.twoCube.gifts.dto.list.GiftMemoResponse;
 import com.twoCube.gifts.dto.request.FlowerRequest;
 import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.repository.FlowerRepository;

@@ -6,7 +6,7 @@ import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
 import com.twoCube.gifts.dto.detail.UserAudioResponse;
 import com.twoCube.gifts.dto.detail.UserNoteResponse;
-import com.twoCube.gifts.dto.list.GiftMemoResponse;
+import com.twoCube.gifts.dto.list.GiftNoteResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.request.NoteRequest;
 import com.twoCube.gifts.repository.GiftNoteRepository;
@@ -31,10 +31,10 @@ public class GiftNoteServiceImpl implements  GiftNoteService{
     }
 
     @Override
-    public List<GiftMemoResponse> getMemoList(Member member) {
-        List<GiftNote> giftMemoList =
+    public List<GiftNoteResponse> getNoteList(Member member) {
+        List<GiftNote> giftNoteList =
                 giftNoteRepository.findAllByCouple(member.getCouple());
-        return GiftMemoResponse.listFrom(giftMemoList);
+        return GiftNoteResponse.listFrom(giftNoteList);
     }
 
     @Override

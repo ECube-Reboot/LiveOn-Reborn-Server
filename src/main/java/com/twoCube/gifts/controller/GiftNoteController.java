@@ -3,7 +3,7 @@ package com.twoCube.gifts.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.detail.UserPolaroidResponse;
-import com.twoCube.gifts.dto.list.GiftMemoResponse;
+import com.twoCube.gifts.dto.list.GiftNoteResponse;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
 import com.twoCube.gifts.dto.request.NoteRequest;
 import com.twoCube.gifts.service.GiftNoteService;
@@ -38,7 +38,7 @@ public class GiftNoteController {
     @ApiOperation(value = "쪽지 선물보기 리스트 api")
     public ResponseEntity<List<GiftNoteResponse>> getNoteList(@ApiIgnore @CurrentUser Member member
     ) {
-        List<GiftNoteResponse> giftNoteResponseList= giftNoteService.getMemoList(member);
+        List<GiftNoteResponse> giftNoteResponseList = giftNoteService.getNoteList(member);
         return ResponseEntity.ok(giftNoteResponseList);
     }
 
