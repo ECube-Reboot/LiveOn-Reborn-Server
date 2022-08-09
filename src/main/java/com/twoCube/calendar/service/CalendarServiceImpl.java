@@ -3,6 +3,7 @@ package com.twoCube.calendar.service;
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.dto.AnniversaryRequest;
 import com.twoCube.calendar.dto.CalendarResponse;
+import com.twoCube.calendar.dto.DayResponse;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.*;
@@ -37,7 +38,6 @@ public class CalendarServiceImpl implements CalendarService{
         LocalDate end = calendarRequest.withDayOfMonth(start.lengthOfMonth());
         LocalDateTime endDate = calendarRequest.withDayOfMonth(start.lengthOfMonth()).atTime(LocalTime.MAX);
 
-
         List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(start, end, member.getCouple());
         List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
@@ -56,5 +56,22 @@ public class CalendarServiceImpl implements CalendarService{
                 .memo(anniversaryRequest.getMemo()).name(anniversaryRequest.getName()).build();
         eventRepository.save(event);
         return event.getId();
+    }
+
+    @Override
+    public DayResponse getDay(Member member, LocalDate calendarRequest) {
+        LocalDate start = calendarRequest.withDayOfMonth(1);
+        LocalDateTime startDate = calendarRequest.withDayOfMonth(1).atStartOfDay();
+        LocalDate end = calendarRequest.withDayOfMonth(start.lengthOfMonth());
+        LocalDateTime endDate = calendarRequest.withDayOfMonth(start.lengthOfMonth()).atTime(LocalTime.MAX);
+
+        List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(start, end, member.getCouple());
+        List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+        List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
+
+        return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, giftPills);
     }
 }

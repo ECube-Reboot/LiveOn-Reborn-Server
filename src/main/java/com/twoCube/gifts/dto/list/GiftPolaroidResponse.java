@@ -15,6 +15,7 @@ public class GiftPolaroidResponse {
     private String giftPolaroidImage;
     private LocalDate createdAt;
     private String userNickName;
+    private String comment;
 
     public static GiftPolaroidResponse from(GiftPolaroid giftPolaroid) {
         return GiftPolaroidResponse.builder()
@@ -22,6 +23,7 @@ public class GiftPolaroidResponse {
                 .giftPolaroidImage(giftPolaroid.getPolaroid())
                 .createdAt(giftPolaroid.getCreatedAt().toLocalDate())
                 .userNickName(giftPolaroid.getMember().getNickName())
+                .comment(giftPolaroid.getComment())
                 .build();
     }
 

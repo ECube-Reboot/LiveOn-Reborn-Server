@@ -56,14 +56,14 @@ public class S3Uploader {
                 .build();
     }
 
-    public String upload(MultipartFile multipartFile, EBucketType bucketType) throws IOException {
-        File uploadFile = convert(multipartFile)
+    public String multipartFileUpload(MultipartFile uploadFile, EBucketType bucketType) throws IOException {
+        File file = convert(uploadFile)
                 .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
-        return upload(uploadFile, bucketType);
+        return fileUpload(file, bucketType);
     }
 
-    private String upload(File uploadFile, EBucketType bucketType) {
+    private String fileUpload(File uploadFile, EBucketType bucketType) {
         String fileName = UUID.randomUUID() + "_" + uploadFile.getName();
         String uploadImageUrl = putS3(uploadFile, fileName, bucketType);
         removeNewFile(uploadFile);

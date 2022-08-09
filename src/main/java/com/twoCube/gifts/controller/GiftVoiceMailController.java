@@ -29,9 +29,10 @@ public class GiftVoiceMailController {
     @ApiOperation(value = "음성메시지 선물하기 api")
     public ResponseEntity<Long> createVoicemail(@RequestPart(required = false) MultipartFile voiceMail,
                                                 @RequestPart(required = false) String title,
+                                                @RequestPart(required = false) String voiceMailDuration,
                                                 @ApiIgnore @CurrentUser Member member
     ) {
-        long giftVoiceMailId = giftVoiceMailService.createVoicemail(voiceMail, title, member);
+        long giftVoiceMailId = giftVoiceMailService.createVoicemail(voiceMail, title, voiceMailDuration,member);
         return ResponseEntity.ok(giftVoiceMailId);
     }
 

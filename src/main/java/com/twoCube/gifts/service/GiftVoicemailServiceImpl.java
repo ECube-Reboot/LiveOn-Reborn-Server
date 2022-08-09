@@ -16,6 +16,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,19 +33,22 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
 
 
     @Override
-    public Long createVoicemail(MultipartFile voicemail, String title, Member member) {
+    public Long createVoicemail(MultipartFile voicemail, String title, String duration,Member member) {
         Couple couple = member.getCouple();
         GiftVoicemail giftVoicemail = null;
 
         try {
-            String imageUrl = s3Uploader.upload(voicemail, EBucketType.voicemail);
+            String imageUrl = s3Uploader.multipartFileUpload(voicemail, EBucketType.voicemail);
+
             giftVoicemail = GiftVoicemail.builder().title(title).couple(couple)
-                    .member(member).voicemail(imageUrl).build();
+                    .duration(duration).member(member).voicemail(imageUrl).build();
 
             giftVoicemailRepository.save(giftVoicemail);
+            System.out.println("success fully saved");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return giftVoicemail.getId();
     }
 

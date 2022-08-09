@@ -9,4 +9,5 @@ import java.util.List;
 
 @Service
 public interface GiftService {
+    MainResponse getMain(Member member);
 }

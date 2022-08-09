@@ -1,6 +1,9 @@
 package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
+import com.twoCube.gifts.dto.detail.UserFlowerResponse;
+import com.twoCube.gifts.dto.detail.UserNoteResponse;
+import com.twoCube.gifts.dto.list.GiftFlowerResponse;
 import com.twoCube.gifts.dto.request.FlowerRequest;
 import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.service.GiftFlowerService;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/gifts/flowers")
 @RequiredArgsConstructor
@@ -19,7 +24,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class GiftFlowerController {
     private final GiftFlowerService giftFlowerService;
 
-    @GetMapping("")
+    @GetMapping("/today")
     @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
     public ResponseEntity<FlowerResponse> getFlower(
             @ApiIgnore @CurrentUser Member member
@@ -35,5 +40,23 @@ public class GiftFlowerController {
     ) {
         Long giftFlowerId = giftFlowerService.createFlower(flowerRequest, member);
         return ResponseEntity.ok(giftFlowerId);
+    }
+
+    @GetMapping("")
+    @ApiOperation(value = "꽃 선물보기 리스트 api")
+    public ResponseEntity<List<GiftFlowerResponse>> getFlowerList(@ApiIgnore @CurrentUser Member member
+    ) {
+        List<GiftFlowerResponse> giftFlowerResponseList = giftFlowerService.getFlowerList(member);
+        return ResponseEntity.ok(giftFlowerResponseList);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "꽃 선물보기 api")
+    public ResponseEntity<UserFlowerResponse> getFlower(
+            @PathVariable Long id,
+            @ApiIgnore @CurrentUser Member member
+    ) {
+        UserFlowerResponse giftFlowerResponse= giftFlowerService.getFlower(id);
+        return ResponseEntity.ok(giftFlowerResponse);
     }
 }
