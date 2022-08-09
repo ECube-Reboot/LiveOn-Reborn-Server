@@ -1,5 +1,6 @@
 package com.twoCube.gifts.dto.list;
 
+import com.twoCube.gifts.domain.EGiftColor;
 import com.twoCube.gifts.domain.GiftNote;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class GiftNoteResponse {
     private String content;
     private LocalDate createdAt;
     private String userNickName;
+    private EGiftColor color;
 
     public static GiftNoteResponse from(GiftNote giftNote) {
         return GiftNoteResponse.builder()
@@ -23,6 +25,7 @@ public class GiftNoteResponse {
                 .content(giftNote.getContent())
                 .createdAt(giftNote.getCreatedAt().toLocalDate())
                 .userNickName(giftNote.getMember().getNickName())
+                .color(giftNote.getColor())
                 .build();
     }
 
