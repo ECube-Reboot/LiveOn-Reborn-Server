@@ -1,10 +1,13 @@
 package com.twoCube.gifts.dto.request;
 
 import com.twoCube.couple.domain.Couple;
+import com.twoCube.gifts.domain.EGiftColor;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+
+import java.util.Random;
 
 @Getter
 public class NoteRequest {
@@ -16,6 +19,7 @@ public class NoteRequest {
     private String content;
 
     public GiftNote toEntity(Member member, Couple couple) {
-        return GiftNote.builder().couple(couple).member(member).content(content).build();
+        int pick = new Random().nextInt(EGiftColor.values().length);
+        return GiftNote.builder().couple(couple).member(member).content(content).color(EGiftColor.values()[pick]).build();
     }
 }
