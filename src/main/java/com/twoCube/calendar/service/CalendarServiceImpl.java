@@ -45,7 +45,7 @@ public class CalendarServiceImpl implements CalendarService{
         List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         return CalendarResponse.from(events, giftPills,
-                giftFlowers, giftPolaroids, giftNotes, giftVoicemails);
+                giftFlowers, giftPolaroids, giftNotes, giftVoicemails, member);
     }
 
     @Override
@@ -72,6 +72,6 @@ public class CalendarServiceImpl implements CalendarService{
         List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
 
-        return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, giftPills);
+        return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, giftPills, member);
     }
 }

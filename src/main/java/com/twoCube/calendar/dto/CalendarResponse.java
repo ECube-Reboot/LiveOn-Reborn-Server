@@ -3,6 +3,7 @@ package com.twoCube.calendar.dto;
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.gifts.domain.*;
 import com.twoCube.gifts.dto.detail.*;
+import com.twoCube.members.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,10 +21,10 @@ public class CalendarResponse {
 
 
     public static CalendarResponse from(List<Event> events, List<GiftPill> giftPills, List<GiftFlower> giftFlowers, List<GiftPolaroid> giftPolaroids,
-                                        List<GiftNote> giftNotes, List<GiftVoicemail> giftVoicemails) {
+                                        List<GiftNote> giftNotes, List<GiftVoicemail> giftVoicemails, Member member) {
         return CalendarResponse.builder()
                 .eventResponseList(EventResponse.listFrom(events))
-                .audioResponseList(UserAudioResponse.listFrom(giftVoicemails))
+                .audioResponseList(UserAudioResponse.listFrom(giftVoicemails, member))
                 .polaroidResponseList(UserPolaroidResponse.listFrom(giftPolaroids))
                 .noteResponseList(UserNoteResponse.listFrom(giftNotes))
                 .flowerResponseList(UserFlowerResponse.listFrom(giftFlowers))

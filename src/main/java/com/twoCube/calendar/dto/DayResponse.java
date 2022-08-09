@@ -21,9 +21,9 @@ public class DayResponse {
     private List<UserPillResponse> pillResponseList;
 
     public DayResponse(List<Event> eventList, List<GiftVoicemail> giftVoicemailList, List<GiftPolaroid> giftPolaroidList,
-                       List<GiftNote> giftNoteList, List<GiftFlower> giftFlowerList, List<GiftPill> giftPillList) {
+                       List<GiftNote> giftNoteList, List<GiftFlower> giftFlowerList, List<GiftPill> giftPillList, Member member) {
         this.eventResponse = EventResponse.from(eventList.get(0));
-        this.audioResponseList = UserAudioResponse.listFrom(giftVoicemailList);
+        this.audioResponseList = UserAudioResponse.listFrom(giftVoicemailList, member);
         this.polaroidResponseList = UserPolaroidResponse.listFrom(giftPolaroidList);
         this.noteResponseList = UserNoteResponse.listFrom(giftNoteList);
         this.flowerResponseList = UserFlowerResponse.listFrom(giftFlowerList);
