@@ -26,7 +26,6 @@ public class CalendarServiceImpl implements CalendarService{
     private final GiftVoicemailRepository giftVoicemailRepository;
     private final GiftNoteRepository giftNoteRepository;
     private final GiftPolaroidRepository giftPolaroidRepository;
-    private final GiftPillRepository giftPillRepository;
     private final GiftFlowerRepository giftFlowerRepository;
 
     @Override
@@ -40,12 +39,10 @@ public class CalendarServiceImpl implements CalendarService{
 
         List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(start, end, member.getCouple());
         List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
-        List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
-        return CalendarResponse.from(events, giftPills,
-                giftFlowers, giftPolaroids, giftNotes, giftVoicemails, member);
+        return CalendarResponse.from(events, giftFlowers, giftPolaroids, giftNotes, giftVoicemails, member);
     }
 
     @Override
@@ -67,11 +64,10 @@ public class CalendarServiceImpl implements CalendarService{
 
         List<Event> events = eventRepository.findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(start, end, member.getCouple());
         List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
-        List<GiftPill> giftPills = giftPillRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
         List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(startDate, endDate, member.getCouple());
 
-        return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, giftPills, member);
+        return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, member);
     }
 }

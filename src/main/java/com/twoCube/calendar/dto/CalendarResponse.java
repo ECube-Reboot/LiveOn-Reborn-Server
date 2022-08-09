@@ -17,10 +17,9 @@ public class CalendarResponse {
     private List<UserPolaroidResponse> polaroidResponseList;
     private List<UserNoteResponse> noteResponseList;
     private List<UserFlowerResponse> flowerResponseList;
-    private List<UserPillResponse> pillResponseList;
 
 
-    public static CalendarResponse from(List<Event> events, List<GiftPill> giftPills, List<GiftFlower> giftFlowers, List<GiftPolaroid> giftPolaroids,
+    public static CalendarResponse from(List<Event> events, List<GiftFlower> giftFlowers, List<GiftPolaroid> giftPolaroids,
                                         List<GiftNote> giftNotes, List<GiftVoicemail> giftVoicemails, Member member) {
         return CalendarResponse.builder()
                 .eventResponseList(EventResponse.listFrom(events))
@@ -28,7 +27,6 @@ public class CalendarResponse {
                 .polaroidResponseList(UserPolaroidResponse.listFrom(giftPolaroids))
                 .noteResponseList(UserNoteResponse.listFrom(giftNotes))
                 .flowerResponseList(UserFlowerResponse.listFrom(giftFlowers))
-                .pillResponseList(UserPillResponse.listFrom(giftPills))
                 .build();
     }
 
