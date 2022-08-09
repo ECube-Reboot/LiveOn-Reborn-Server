@@ -51,9 +51,9 @@ public class CalendarServiceImpl implements CalendarService{
     @Override
     public Long addEvent(AnniversaryRequest anniversaryRequest, Member member) {
         Couple couple = member.getCouple();
-        Event event = Event.builder().eventDate(anniversaryRequest.getDate())
-                .couple(couple).icon(anniversaryRequest.getIcon())
-                .memo(anniversaryRequest.getMemo()).name(anniversaryRequest.getName()).build();
+        Event event = Event.builder().eventDate(anniversaryRequest.getUpcomingEventdate())
+                .couple(couple)
+                .memo(anniversaryRequest.getUpcomingEventMemo()).name(anniversaryRequest.getUpcomingEventTitle()).build();
         eventRepository.save(event);
         return event.getId();
     }
