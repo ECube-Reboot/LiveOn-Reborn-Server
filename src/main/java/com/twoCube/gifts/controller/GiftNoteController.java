@@ -36,10 +36,10 @@ public class GiftNoteController {
 
     @GetMapping("")
     @ApiOperation(value = "쪽지 선물보기 리스트 api")
-    public ResponseEntity<List<GiftMemoResponse>> getMemoList(@ApiIgnore @CurrentUser Member member
+    public ResponseEntity<List<GiftNoteResponse>> getNoteList(@ApiIgnore @CurrentUser Member member
     ) {
-        List<GiftMemoResponse> giftMemoResponseList= giftNoteService.getMemoList(member);
-        return ResponseEntity.ok(giftMemoResponseList);
+        List<GiftNoteResponse> giftNoteResponseList= giftNoteService.getMemoList(member);
+        return ResponseEntity.ok(giftNoteResponseList);
     }
 
     @GetMapping("/{id}")
