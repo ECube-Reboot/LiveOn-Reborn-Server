@@ -11,20 +11,18 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 public class EventResponse {
-    private Long id;
-    private String emoji;
-    private String eventTitle;
-    private String eventMemo;
-    private LocalDate eventDate;
+    private Long upcomingEventId;
+    private String upcomingEventTitle;
+    private String upcomingEventMemo;
+    private LocalDate upcomingEventDate;
 
     public static EventResponse from(Event event) {
 
         return EventResponse.builder()
-                .id(event.getId())
-                .emoji(event.getIcon())
-                .eventTitle(event.getName())
-                .eventMemo(event.getMemo())
-                .eventDate(event.getEventDate())
+                .upcomingEventId(event.getId())
+                .upcomingEventTitle(event.getName())
+                .upcomingEventDate(event.getEventDate())
+                .upcomingEventMemo(event.getMemo())
                 .build();
     }
 
