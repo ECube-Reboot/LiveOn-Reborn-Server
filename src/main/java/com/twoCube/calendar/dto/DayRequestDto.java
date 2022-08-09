@@ -15,6 +15,5 @@ public class DayRequestDto {
     private List<UserPolaroidResponse> polaroidResponseList;
     private List<UserNoteResponse> noteResponseList;
     private List<UserFlowerResponse> flowerResponseList;
-    private List<UserPillResponse> pillResponseList;
 
 }

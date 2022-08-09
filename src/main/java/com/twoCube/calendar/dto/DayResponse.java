@@ -18,16 +18,14 @@ public class DayResponse {
     private List<UserPolaroidResponse> polaroidResponseList;
     private List<UserNoteResponse> noteResponseList;
     private List<UserFlowerResponse> flowerResponseList;
-    private List<UserPillResponse> pillResponseList;
 
     public DayResponse(List<Event> eventList, List<GiftVoicemail> giftVoicemailList, List<GiftPolaroid> giftPolaroidList,
-                       List<GiftNote> giftNoteList, List<GiftFlower> giftFlowerList, List<GiftPill> giftPillList, Member member) {
+                       List<GiftNote> giftNoteList, List<GiftFlower> giftFlowerList, Member member) {
         this.eventResponse = EventResponse.from(eventList.get(0));
         this.audioResponseList = UserAudioResponse.listFrom(giftVoicemailList, member);
         this.polaroidResponseList = UserPolaroidResponse.listFrom(giftPolaroidList);
         this.noteResponseList = UserNoteResponse.listFrom(giftNoteList);
         this.flowerResponseList = UserFlowerResponse.listFrom(giftFlowerList);
-        this.pillResponseList = UserPillResponse.listFrom(giftPillList);
     }
 
 }
