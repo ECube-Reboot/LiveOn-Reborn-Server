@@ -25,6 +25,7 @@ public class GiftNote extends BaseTimeEntity {
 
     private boolean userChecked;
 
+    @Enumerated(EnumType.STRING)
     private EGiftColor color;
 
     @ManyToOne
