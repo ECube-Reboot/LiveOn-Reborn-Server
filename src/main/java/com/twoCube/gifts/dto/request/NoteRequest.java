@@ -18,8 +18,10 @@ public class NoteRequest {
                     "오늘은 날씨가 좀 춥다니까 따뜻하게 입고가구..")
     private String content;
 
+    @ApiModelProperty(value = "쪽지 색", example = "letter_blue")
+    private String color;
+
     public GiftNote toEntity(Member member, Couple couple) {
-        int pick = new Random().nextInt(EGiftColor.values().length);
-        return GiftNote.builder().couple(couple).member(member).content(content).color(EGiftColor.values()[pick]).build();
+        return GiftNote.builder().couple(couple).member(member).content(content).color(EGiftColor.valueOf(color)).build();
     }
 }
