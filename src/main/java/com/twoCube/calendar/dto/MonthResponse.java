@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Getter
 public class MonthResponse {
 
-    LocalDate createdAt;
-    EGiftType giftType;
+    String createdAt;
+    String giftType;
 
     public static List<MonthResponse> listfrom(List<GiftFlower> giftFlowers, List<GiftPolaroid> giftPolaroids,
                                         List<GiftNote> giftNotes, List<GiftVoicemail> giftVoicemails, Member member) {
@@ -31,26 +31,26 @@ public class MonthResponse {
 
         for (GiftPolaroid giftPolaroid : giftPolaroids){
             appendingData.add(MonthResponse.builder()
-                    .createdAt(giftPolaroid.getCreatedAt().toLocalDate())
-                    .giftType(EGiftType.polaroid).build());
+                    .createdAt(giftPolaroid.getCreatedAt().toLocalDate().toString())
+                    .giftType(EGiftType.polaroid.toString()).build());
         }
 
         for (GiftNote giftNote : giftNotes){
             appendingData.add(MonthResponse.builder()
-                    .createdAt(giftNote.getCreatedAt().toLocalDate())
-                    .giftType(EGiftType.note).build());
+                    .createdAt(giftNote.getCreatedAt().toLocalDate().toString())
+                    .giftType(EGiftType.note.toString()).build());
         }
 
         for (GiftVoicemail giftVoicemail : giftVoicemails){
             appendingData.add(MonthResponse.builder()
-                    .createdAt(giftVoicemail.getCreatedAt().toLocalDate())
-                    .giftType(EGiftType.voicemail).build());
+                    .createdAt(giftVoicemail.getCreatedAt().toLocalDate().toString())
+                    .giftType(EGiftType.voicemail.toString()).build());
         }
 
         for (GiftFlower giftFlower : giftFlowers){
             appendingData.add(MonthResponse.builder()
-                    .createdAt(giftFlower.getCreatedAt().toLocalDate())
-                    .giftType(EGiftType.flower).build());
+                    .createdAt(giftFlower.getCreatedAt().toLocalDate().toString())
+                    .giftType(EGiftType.flower.toString()).build());
         }
         return appendingData;
     }
