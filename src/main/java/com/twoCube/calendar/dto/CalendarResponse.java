@@ -7,27 +7,24 @@ import com.twoCube.members.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Builder
 public class CalendarResponse {
     private List<EventResponse> eventResponseList;
-    private List<UserAudioResponse> audioResponseList;
-    private List<UserPolaroidResponse> polaroidResponseList;
-    private List<UserNoteResponse> noteResponseList;
-    private List<UserFlowerResponse> flowerResponseList;
-
+    private List<MonthResponse> monthResponses;
 
     public static CalendarResponse from(List<Event> events, List<GiftFlower> giftFlowers, List<GiftPolaroid> giftPolaroids,
                                         List<GiftNote> giftNotes, List<GiftVoicemail> giftVoicemails, Member member) {
-        return CalendarResponse.builder()
-                .eventResponseList(EventResponse.listFrom(events))
-                .audioResponseList(UserAudioResponse.listFrom(giftVoicemails, member))
-                .polaroidResponseList(UserPolaroidResponse.listFrom(giftPolaroids))
-                .noteResponseList(UserNoteResponse.listFrom(giftNotes))
-                .flowerResponseList(UserFlowerResponse.listFrom(giftFlowers))
-                .build();
+
+            return CalendarResponse.builder()
+                    .eventResponseList(EventResponse.listFrom(events))
+                    .monthResponses(
+                            MonthResponse.listfrom(
+                                    giftFlowers, giftPolaroids, giftNotes, giftVoicemails, member))
+                    .build();
     }
 
 }
