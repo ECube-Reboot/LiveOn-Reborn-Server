@@ -14,14 +14,14 @@ public class EventResponse {
     private Long upcomingEventId;
     private String upcomingEventTitle;
     private String upcomingEventMemo;
-    private LocalDate upcomingEventDate;
+    private String upcomingEventDate;
 
     public static EventResponse from(Event event) {
 
         return EventResponse.builder()
                 .upcomingEventId(event.getId())
                 .upcomingEventTitle(event.getName())
-                .upcomingEventDate(event.getEventDate())
+                .upcomingEventDate(event.getEventDate().toString())
                 .upcomingEventMemo(event.getMemo())
                 .build();
     }

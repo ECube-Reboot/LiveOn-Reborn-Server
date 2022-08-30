@@ -33,7 +33,6 @@ public class CoupleController {
     public ResponseEntity<String> validateCode(@RequestBody Code code,
                                                @ApiIgnore @CurrentUser Member member
     ) {
-        System.out.println("controller");
         String statusMessage = coupleService.validateCode(code, member);
         return ResponseEntity.ok(statusMessage);
     }
