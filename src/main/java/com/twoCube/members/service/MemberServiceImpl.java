@@ -35,10 +35,10 @@ public class MemberServiceImpl implements MemberService {
     public ProfileResponse getProfile(Member member){
         List<Member> partner = memberRepository
                 .findByCouple(member.getCouple())
-                .stream().filter(person -> person != member)
+                .stream().filter(person -> person.getId() == member.getId())
                 .collect(Collectors.toList());
 
-        return new ProfileResponse(member, partner.get(0), eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple()));
+        return new ProfileResponse(member, partner.get(0), eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple()).orElseThrow());
     }
 
     @Override

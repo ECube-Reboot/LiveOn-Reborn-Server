@@ -2,6 +2,7 @@ package com.twoCube.gifts.service;
 
 import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
+import com.twoCube.common.exception.GiftAlreadySentException;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
@@ -30,10 +31,13 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
 
     private final S3Uploader s3Uploader;
     private final GiftVoicemailRepository giftVoicemailRepository;
-
+    private final GiftService giftService;
 
     @Override
     public Long createVoicemail(MultipartFile voicemail, String title, String duration,Member member) {
+        if(giftService.haveUserGifted(member)){
+            throw new GiftAlreadySentException();
+        }
         Couple couple = member.getCouple();
         GiftVoicemail giftVoicemail = null;
 

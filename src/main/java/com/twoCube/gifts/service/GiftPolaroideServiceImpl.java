@@ -2,6 +2,7 @@ package com.twoCube.gifts.service;
 
 import com.twoCube.common.EBucketType;
 import com.twoCube.common.S3Uploader;
+import com.twoCube.common.exception.GiftAlreadySentException;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.dto.list.GiftPolaroidResponse;
@@ -20,10 +21,14 @@ import java.util.List;
 public class GiftPolaroideServiceImpl implements GiftPolaroidService {
     private final S3Uploader s3Uploader;
     private final GiftPolaroidRepository giftPolaroidRepository;
+    private final GiftService giftService;
 
 
     @Override
     public Long createPolaroid(MultipartFile polaroid, String comment, Member member) {
+        if(giftService.haveUserGifted(member)){
+            throw new GiftAlreadySentException();
+        }
         Couple couple = member.getCouple();
         GiftPolaroid giftPolaroid = null;
         try {

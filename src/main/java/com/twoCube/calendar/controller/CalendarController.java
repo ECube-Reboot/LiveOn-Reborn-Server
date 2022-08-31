@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/v1/calendar")
@@ -46,9 +47,11 @@ public class CalendarController {
     @GetMapping("")
     @ApiOperation(value = "캘린더 메인 api")
     public ResponseEntity<CalendarResponse> getCalendar(@ApiIgnore @CurrentUser Member member,
-                                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate calendarRequest
+                                                        @RequestParam String calendarRequest
     ) {
-        CalendarResponse calendarResponseDto = calendarService.getCalendar(member, calendarRequest);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate requestDate = LocalDate.parse(calendarRequest, formatter);
+        CalendarResponse calendarResponseDto = calendarService.getCalendar(member, requestDate);
         return ResponseEntity.ok(calendarResponseDto);
     }
 

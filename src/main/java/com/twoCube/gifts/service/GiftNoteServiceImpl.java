@@ -1,5 +1,6 @@
 package com.twoCube.gifts.service;
 
+import com.twoCube.common.exception.GiftAlreadySentException;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.domain.GiftPolaroid;
@@ -21,9 +22,14 @@ import java.util.List;
 public class GiftNoteServiceImpl implements  GiftNoteService{
 
     private final GiftNoteRepository giftNoteRepository;
+    private final GiftService giftService;
 
     @Override
     public Long createNote(NoteRequest noteRequest, Member member) {
+        if(giftService.haveUserGifted(member)){
+            System.out.println("gift existing");
+            throw new GiftAlreadySentException();
+        }
         Couple couple = member.getCouple();
         GiftNote giftNote = noteRequest.toEntity(member, couple);
         GiftNote giftNoteId = giftNoteRepository.save(giftNote);

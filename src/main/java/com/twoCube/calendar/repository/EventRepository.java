@@ -9,9 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(LocalDate start, LocalDate end, Couple couple);
-    Event findByNameAndCouple(@Param(value = "name") String name, @Param(value="couple")Couple couple);
+    Optional<Event> findByNameAndCouple(@Param(value = "name") String name, @Param(value="couple")Couple couple);
 }

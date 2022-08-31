@@ -5,6 +5,7 @@ import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.dto.EGiftType;
 import com.twoCube.gifts.dto.MainResponse;
 import com.twoCube.gifts.repository.GiftFlowerRepository;
+import com.twoCube.gifts.repository.GiftNoteRepository;
 import com.twoCube.gifts.repository.GiftPolaroidRepository;
 import com.twoCube.gifts.repository.GiftVoicemailRepository;
 import com.twoCube.members.domain.Member;
@@ -28,6 +29,7 @@ public class GiftServiceImpl implements GiftService {
     private final GiftFlowerRepository giftFlowerRepository;
     private final GiftPolaroidRepository giftPolaroidRepository;
     private final GiftVoicemailRepository giftVoicemailRepository;
+    private final GiftNoteRepository giftNoteRepository;
     private final MemberRepository memberRepository;
 
 
@@ -37,7 +39,7 @@ public class GiftServiceImpl implements GiftService {
         LocalDate now = LocalDate.now();
 
         LocalDate officialDate = eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple())
-                .getEventDate();
+                .orElseThrow().getEventDate();
 
         Period period = now.until(now);
 
@@ -66,7 +68,7 @@ public class GiftServiceImpl implements GiftService {
         if (giftFlowerRepository.existsByCoupleAndUserChecked(couple, false)) {
             nonRecievedGiftType.add(EGiftType.flower);
         }
-        if (giftPolaroidRepository.existsByCoupleAndUserChecked(couple, false)) {
+        if (giftNoteRepository.existsByCoupleAndUserChecked(couple, false)) {
             nonRecievedGiftType.add(EGiftType.polaroid);
         }
         if (giftVoicemailRepository.existsByCoupleAndUserChecked(couple, false)) {
@@ -75,23 +77,20 @@ public class GiftServiceImpl implements GiftService {
         return nonRecievedGiftType;
     }
 
-    private boolean haveUserGifted(Member member) {
+    public boolean haveUserGifted(Member member) {
         LocalDateTime startDate = LocalDate.now().atStartOfDay();
         LocalDateTime endDate = LocalDate.now().atTime(LocalTime.MAX);
 
         if (giftFlowerRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
             return true;
         }
-        if (giftFlowerRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
+        if (giftNoteRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
             return true;
         }
-        if (giftFlowerRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
+        if (giftVoicemailRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
             return true;
         }
-        if (giftFlowerRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
-            return true;
-        }
-        if (giftFlowerRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
+        if (giftPolaroidRepository.existsByCreatedAtGreaterThanAndCreatedAtLessThanAndMember(startDate, endDate, member)) {
             return true;
         }
         return false;
