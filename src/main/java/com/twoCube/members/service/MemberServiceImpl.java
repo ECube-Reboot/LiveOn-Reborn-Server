@@ -55,6 +55,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void withdrawlMemberShip(Member member) {
         member.setDeleted(true);
+        memberRepository.save(member);
         withdrawlRepository.save(WithdrawlMember.builder().member(member).build());
         return;
     }
