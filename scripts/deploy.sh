@@ -5,7 +5,7 @@ REPOSITORY=/home/ec2-user/app/prod/zip
 echo">check running pid"
 
 
-CURRENT_PID=$(pgrep -f 2Cube)
+CURRENT_PID=$(lsof -t -i :8081)
 
 
 echo "> CURRENT_PID"
