@@ -32,4 +32,8 @@ public class Event extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
+
+    public void changeDate(LocalDate newDate) {
+        this.eventDate = newDate;
+    }
 }

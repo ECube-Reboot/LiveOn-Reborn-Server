@@ -4,9 +4,7 @@ import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.domain.WithdrawlMember;
-import com.twoCube.members.dto.MemberInfoRequest;
-import com.twoCube.members.dto.ProfileRequest;
-import com.twoCube.members.dto.ProfileResponse;
+import com.twoCube.members.dto.*;
 import com.twoCube.members.repository.MemberRepository;
 import com.twoCube.members.repository.WithdrawlMemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,11 +48,31 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public ProfileResponse updateProfile(Member member, ProfileRequest profileRequest) {
+    public void updateNickname(Member member, NicknameRequest profileRequest) {
         member.setNickName(profileRequest.getNickName());
         memberRepository.save(member);
         ProfileResponse profileResponse = getProfile(member);
-        return profileResponse;
+    }
+
+    @Override
+    @Transactional
+    public void updateBirthday(Member member, BirthdayRequest birthdayRequest) {
+        Event birhday = eventRepository
+                .findByNameAndCouple(member.getNickName() + "생일", member.getCouple())
+                .orElseThrow();
+        birhday.changeDate(birthdayRequest.getBirthDay());
+        eventRepository.save(birhday);
+    }
+
+    @Override
+    @Transactional
+    public void updateOfficialDate(Member member,
+                                   OfficialDateRequest officialDateRequest) {
+        Event officialDate = eventRepository
+                .findByNameAndCouple("처음 사귄 날", member.getCouple())
+                .orElseThrow();
+        officialDate.changeDate(officialDateRequest.getOfficialDate());
+        eventRepository.save(officialDate);
     }
 
     @Override

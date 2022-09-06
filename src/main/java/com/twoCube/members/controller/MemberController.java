@@ -4,7 +4,7 @@ package com.twoCube.members.controller;
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.dto.MemberInfoRequest;
-import com.twoCube.members.dto.ProfileRequest;
+import com.twoCube.members.dto.NicknameRequest;
 import com.twoCube.members.dto.ProfileResponse;
 import com.twoCube.members.service.MemberService;
 import io.swagger.annotations.Api;
@@ -48,11 +48,11 @@ public class MemberController {
         return ResponseEntity.ok(profileResponse);
     }
 
-    @PatchMapping("")
-    @ApiOperation(value = "프로필 편집 api")
-    public ResponseEntity<ProfileResponse> updateProfile(@RequestBody ProfileRequest profileRequest,
+    @PatchMapping("/nickname")
+    @ApiOperation(value = "닉네임 편집 api")
+    public ResponseEntity<ProfileResponse> updateProfile(@RequestBody NicknameRequest nicknameRequest,
                                                          @ApiIgnore @CurrentUser Member member) {
-        ProfileResponse profileResponse = memberService.updateProfile(member, profileRequest);
+        ProfileResponse profileResponse = memberService.updateProfile(member, nicknameRequest);
         return ResponseEntity.ok(profileResponse);
     }
 }

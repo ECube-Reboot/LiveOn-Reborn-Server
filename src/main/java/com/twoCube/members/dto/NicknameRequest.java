@@ -3,6 +3,6 @@ package com.twoCube.members.dto;
 import lombok.Getter;
 
 @Getter
-public class ProfileRequest {
+public class NicknameRequest {
     private String nickName;
 }
