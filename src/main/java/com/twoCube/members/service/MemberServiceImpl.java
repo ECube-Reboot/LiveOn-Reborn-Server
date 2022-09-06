@@ -54,6 +54,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
+    public CoupleResponse checkIfCouple(Member member) {
+        if(member.getCouple() != null){
+            return CoupleResponse.builder().coupleMatched(false).build();
+        }else{
+            return CoupleResponse.builder().coupleMatched(true).build();
+        }
+    }
+
+    @Override
+    @Transactional
     public void updateBirthday(Member member, BirthdayRequest birthdayRequest) {
         Event birhday = eventRepository
                 .findByNameAndCouple(member.getNickName() + "생일", member.getCouple())

@@ -13,4 +13,5 @@ public interface MemberService  {
     void updateBirthday(Member member, BirthdayRequest birthdayRequest);
     void updateOfficialDate(Member member,
                             OfficialDateRequest officialDateRequest);
+    CoupleResponse checkIfCouple(Member member);
 }

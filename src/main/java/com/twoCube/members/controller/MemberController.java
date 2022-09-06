@@ -31,6 +31,14 @@ public class MemberController {
         return ResponseEntity.ok(coupleId);
     }
 
+    @GetMapping("/couple")
+    @ApiOperation(value = "커플 매칭 됬는지 여부 확인")
+    public ResponseEntity<CoupleResponse> saveMemberInfo(
+                                               @ApiIgnore @CurrentUser Member member
+    ) {
+        return ResponseEntity.ok(memberService.checkIfCouple(member));
+    }
+
     @PatchMapping("/withdrawl")
     @ApiOperation(value = "회원 탈퇴 api")
     public ResponseEntity<Long> withdrawlMemberShip (@ApiIgnore @CurrentUser Member member
