@@ -39,11 +39,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public ProfileResponse getProfile(Member member){
+        System.out.println(memberRepository.findByCouple(member.getCouple()).size());
         List<Member> partner = memberRepository
                 .findByCouple(member.getCouple())
-                .stream().filter(person -> person.getId() == member.getId())
+                .stream().filter(person -> person.getId() != member.getId())
                 .collect(Collectors.toList());
-
+        System.out.println(partner.size());
         return new ProfileResponse(member, partner.get(0), eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple()).orElseThrow());
     }
 
