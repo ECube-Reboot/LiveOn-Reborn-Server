@@ -11,4 +11,5 @@ public interface MemberService  {
     Long updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest);
     ProfileResponse getProfile(Member member);
     ProfileResponse updateProfile(Member member, ProfileRequest profileRequest);
+    void withdrawlMemberShip(Member member);
 }

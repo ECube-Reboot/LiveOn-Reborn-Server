@@ -36,7 +36,7 @@ public class GiftVoicemailServiceImpl implements GiftVoiceMailService{
     @Override
     public Long createVoicemail(MultipartFile voicemail, String title, String duration,Member member) {
         if(giftService.haveUserGifted(member)){
-            throw new GiftAlreadySentException();
+//            throw new GiftAlreadySentException();
         }
         Couple couple = member.getCouple();
         GiftVoicemail giftVoicemail = null;

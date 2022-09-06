@@ -16,7 +16,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public CurrentUserDetails loadUserByUsername(String socialId) {
-        return userRepository.findBySocialId(socialId)
+        return userRepository.findBySocialIdAndDeleted(socialId, false)
                 .map(u -> new CurrentUserDetails(u, Collections.singleton(new SimpleGrantedAuthority("USER"))))
                 .orElseThrow(() -> new UserNotFoundException(socialId));
     }

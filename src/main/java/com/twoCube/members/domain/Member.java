@@ -29,6 +29,7 @@ public class Member extends BaseTimeEntity {
     private String name;
 
     private String socialId;
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(name="couple_id")
@@ -39,6 +40,7 @@ public class Member extends BaseTimeEntity {
         this.socialId = socialId;
         this.id = id;
         this.nickName = nickName;
+        this.deleted = false;
     }
 
 }

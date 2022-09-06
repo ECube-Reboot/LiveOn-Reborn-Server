@@ -3,10 +3,12 @@ package com.twoCube.members.service;
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.members.domain.Member;
+import com.twoCube.members.domain.WithdrawlMember;
 import com.twoCube.members.dto.MemberInfoRequest;
 import com.twoCube.members.dto.ProfileRequest;
 import com.twoCube.members.dto.ProfileResponse;
 import com.twoCube.members.repository.MemberRepository;
+import com.twoCube.members.repository.WithdrawlMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final EventRepository eventRepository;
+    private final WithdrawlMemberRepository withdrawlRepository;
 
     @Override
     public Long updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest) {
@@ -47,5 +50,12 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
         ProfileResponse profileResponse = getProfile(member);
         return profileResponse;
+    }
+
+    @Override
+    public void withdrawlMemberShip(Member member) {
+        member.setDeleted(true);
+        withdrawlRepository.save(WithdrawlMember.builder().member(member).build());
+        return;
     }
 }

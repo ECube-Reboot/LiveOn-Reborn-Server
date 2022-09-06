@@ -33,6 +33,14 @@ public class MemberController {
         return ResponseEntity.ok(coupleId);
     }
 
+    @PatchMapping("/withdrawl")
+    @ApiOperation(value = "회원 탈퇴 api")
+    public ResponseEntity<Long> withdrawlMemberShip (@ApiIgnore @CurrentUser Member member
+    ) {
+        memberService.withdrawlMemberShip(member);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("")
     @ApiOperation(value = "프로필 보기 api")
     public ResponseEntity<ProfileResponse> getProfile(@ApiIgnore @CurrentUser Member member) {
