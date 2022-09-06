@@ -11,6 +11,7 @@ import com.twoCube.gifts.repository.*;
 import com.twoCube.members.domain.Member;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class CalendarServiceImpl implements CalendarService{
     private final GiftFlowerRepository giftFlowerRepository;
 
     @Override
+    @Transactional
     public CalendarResponse getCalendar(Member member, LocalDate calendarRequest) {
 
 //        이후 커플제약 걸기
@@ -46,6 +48,7 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
+    @Transactional
     public Long addEvent(AnniversaryRequest anniversaryRequest, Member member) {
         Couple couple = member.getCouple();
         Event event = Event.builder().eventDate(anniversaryRequest.getUpcomingEventdate())
@@ -56,6 +59,7 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
+    @Transactional
     public DayResponse getDay(Member member, LocalDate calendarRequest) {
 
         List<Event> events = eventRepository.findAllByEventDateAndCouple(calendarRequest, member.getCouple());

@@ -25,7 +25,7 @@ public class GiftFlowerServiceImpl implements GiftFlowerService {
     @Override
     public Long createFlower(FlowerRequest flowerRequest, Member member) {
         if(giftService.haveUserGifted(member)){
-            throw new GiftAlreadySentException();
+//            throw new GiftAlreadySentException();
         }
         Couple couple = member.getCouple();
         GiftFlower giftFlower = flowerRequest

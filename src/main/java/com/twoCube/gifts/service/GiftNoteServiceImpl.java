@@ -27,8 +27,8 @@ public class GiftNoteServiceImpl implements  GiftNoteService{
     @Override
     public Long createNote(NoteRequest noteRequest, Member member) {
         if(giftService.haveUserGifted(member)){
-            System.out.println("gift existing");
-            throw new GiftAlreadySentException();
+//            System.out.println("gift existing");
+//            throw new GiftAlreadySentException();
         }
         Couple couple = member.getCouple();
         GiftNote giftNote = noteRequest.toEntity(member, couple);

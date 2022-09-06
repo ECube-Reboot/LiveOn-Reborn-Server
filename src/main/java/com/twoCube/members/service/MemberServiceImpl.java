@@ -11,6 +11,7 @@ import com.twoCube.members.repository.MemberRepository;
 import com.twoCube.members.repository.WithdrawlMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
     private final WithdrawlMemberRepository withdrawlRepository;
 
     @Override
+    @Transactional
     public Long updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest) {
         member.setNickName(memberInfoRequest.getNickName());
         memberRepository.save(member);
@@ -35,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public ProfileResponse getProfile(Member member){
         List<Member> partner = memberRepository
                 .findByCouple(member.getCouple())
@@ -45,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public ProfileResponse updateProfile(Member member, ProfileRequest profileRequest) {
         member.setNickName(profileRequest.getNickName());
         memberRepository.save(member);
@@ -53,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void withdrawlMemberShip(Member member) {
         member.setDeleted(true);
         memberRepository.save(member);

@@ -27,7 +27,7 @@ public class GiftPolaroideServiceImpl implements GiftPolaroidService {
     @Override
     public Long createPolaroid(MultipartFile polaroid, String comment, Member member) {
         if(giftService.haveUserGifted(member)){
-            throw new GiftAlreadySentException();
+//            throw new GiftAlreadySentException();
         }
         Couple couple = member.getCouple();
         GiftPolaroid giftPolaroid = null;
