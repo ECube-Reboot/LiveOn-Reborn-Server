@@ -25,6 +25,9 @@ public class GiftFlower extends BaseTimeEntity {
 
     private boolean userChecked;
 
+    @Enumerated(EnumType.STRING)
+    private EFlowerName name;
+
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member member;
@@ -32,9 +35,5 @@ public class GiftFlower extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name="couple_id")
     private Couple couple;
-
-    @ManyToOne
-    @JoinColumn(name="flower_id")
-    private Flower flower;
 
 }

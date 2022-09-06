@@ -2,10 +2,8 @@ package com.twoCube.gifts.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.gifts.dto.detail.UserFlowerResponse;
-import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.list.GiftFlowerResponse;
 import com.twoCube.gifts.dto.request.FlowerRequest;
-import com.twoCube.gifts.dto.FlowerResponse;
 import com.twoCube.gifts.service.GiftFlowerService;
 import com.twoCube.members.domain.Member;
 import io.swagger.annotations.Api;
@@ -23,15 +21,6 @@ import java.util.List;
 @Api(tags = {"꽃 선물 API"})
 public class GiftFlowerController {
     private final GiftFlowerService giftFlowerService;
-
-    @GetMapping("/today")
-    @ApiOperation(value = "랜덤으로 꽃 가져오기 api")
-    public ResponseEntity<FlowerResponse> getFlower(
-            @ApiIgnore @CurrentUser Member member
-    ) {
-        FlowerResponse flowerResponse = giftFlowerService.getRandomFlower(member);
-        return ResponseEntity.ok(flowerResponse);
-    }
 
     @PostMapping("")
     @ApiOperation(value = "꽃 선물하기 api")

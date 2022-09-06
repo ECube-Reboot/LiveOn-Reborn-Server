@@ -2,15 +2,12 @@ package com.twoCube.gifts.service;
 
 import com.twoCube.common.exception.GiftAlreadySentException;
 import com.twoCube.couple.domain.Couple;
-import com.twoCube.gifts.domain.Flower;
 import com.twoCube.gifts.domain.GiftFlower;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.dto.detail.UserFlowerResponse;
 import com.twoCube.gifts.dto.detail.UserNoteResponse;
 import com.twoCube.gifts.dto.list.GiftFlowerResponse;
 import com.twoCube.gifts.dto.request.FlowerRequest;
-import com.twoCube.gifts.dto.FlowerResponse;
-import com.twoCube.gifts.repository.FlowerRepository;
 import com.twoCube.gifts.repository.GiftFlowerRepository;
 import com.twoCube.members.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +18,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GiftFlowerServiceImpl implements GiftFlowerService {
-
-    private final FlowerRepository flowerRepository;
     private final GiftService giftService;
     private final GiftFlowerRepository giftFlowerRepository;
 
-    @Override
-    public FlowerResponse getRandomFlower(Member member) {
-        Flower flower = flowerRepository.findFlowerByRand();
-        return new FlowerResponse(flower);
-    }
 
     @Override
     public Long createFlower(FlowerRequest flowerRequest, Member member) {
@@ -38,8 +28,8 @@ public class GiftFlowerServiceImpl implements GiftFlowerService {
             throw new GiftAlreadySentException();
         }
         Couple couple = member.getCouple();
-        Flower flower = flowerRepository.getById(flowerRequest.getFlowerId());
-        GiftFlower giftFlower = flowerRequest.toEntity(member, couple, flower);
+        GiftFlower giftFlower = flowerRequest
+                .toEntity(member, couple, flowerRequest.getFlowerName());
         giftFlowerRepository.save(giftFlower);
         return giftFlower.getId();
     }

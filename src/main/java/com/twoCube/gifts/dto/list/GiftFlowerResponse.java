@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 public class GiftFlowerResponse {
-    private long giftFlowerId;
-    private String giftFlowerImage;
+    private String giftFlowerName;
 
     public static GiftFlowerResponse from(GiftFlower giftFlower) {
         return GiftFlowerResponse.builder()
-                .giftFlowerId(giftFlower.getId())
-                .giftFlowerImage(giftFlower.getFlower().getImage())
+                .giftFlowerName(giftFlower.getName().toString())
                 .build();
     }
 
