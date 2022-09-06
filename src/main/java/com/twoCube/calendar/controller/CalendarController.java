@@ -27,11 +27,20 @@ public class CalendarController {
 
     @PostMapping("")
     @ApiOperation(value = "기념일 생성하기 api")
-    public ResponseEntity<Long> createNote(@RequestBody AnniversaryRequest anniversaryRequest,
+    public ResponseEntity<Long> createEvent(@RequestBody AnniversaryRequest anniversaryRequest,
                                            @ApiIgnore @CurrentUser Member member
     ) {
         Long eventId = calendarService.addEvent(anniversaryRequest, member);
         return ResponseEntity.ok(eventId);
+    }
+
+    @DeleteMapping("")
+    @ApiOperation(value = "기념일 삭제하기 api")
+    public ResponseEntity<Long> createNote(@PathVariable Long eventId,
+                                           @ApiIgnore @CurrentUser Member member
+    ) {
+        calendarService.deleteEvent(eventId, member);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/day")

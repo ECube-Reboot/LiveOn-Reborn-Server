@@ -15,4 +15,5 @@ public interface CalendarService {
     CalendarResponse getCalendar(Member member, LocalDate calendarRequest);
     Long addEvent(AnniversaryRequest anniversaryRequest, Member member);
     DayResponse getDay(Member member, LocalDate calendarRequest);
+    void deleteEvent(Long eventId, Member member);
 }

@@ -60,6 +60,13 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     @Transactional
+    public void deleteEvent(Long eventId, Member member) {
+        eventRepository.deleteById(eventId);
+    }
+
+
+    @Override
+    @Transactional
     public DayResponse getDay(Member member, LocalDate calendarRequest) {
 
         List<Event> events = eventRepository.findAllByEventDateAndCouple(calendarRequest, member.getCouple());
