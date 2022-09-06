@@ -14,5 +14,6 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByEventDateGreaterThanAndEventDateLessThanAndCouple(LocalDate start, LocalDate end, Couple couple);
+    List<Event> findAllByEventDateAndCouple(LocalDate start, Couple couple);
     Optional<Event> findByNameAndCouple(@Param(value = "name") String name, @Param(value="couple")Couple couple);
 }

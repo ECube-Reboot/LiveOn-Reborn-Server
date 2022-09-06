@@ -16,6 +16,7 @@ import java.util.List;
 @Repository
 public interface GiftFlowerRepository extends JpaRepository<GiftFlower, Long> {
     List<GiftFlower> findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
+    List<GiftFlower> findAllByGiftDateAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
 
     List<GiftFlower> findAllByCouple(Couple couple);
 

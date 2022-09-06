@@ -2,6 +2,7 @@ package com.twoCube.gifts.repository;
 
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.couple.domain.Couple;
+import com.twoCube.gifts.domain.GiftFlower;
 import com.twoCube.gifts.domain.GiftNote;
 import com.twoCube.gifts.domain.GiftPolaroid;
 import com.twoCube.gifts.domain.GiftVoicemail;
@@ -16,6 +17,8 @@ import java.util.List;
 @Repository
 public interface GiftNoteRepository extends JpaRepository<GiftNote, Long> {
     List<GiftNote> findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
+
+    List<GiftNote> findAllByGiftDateAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
 
     List<GiftNote> findAllByCouple(Couple couple);
 
