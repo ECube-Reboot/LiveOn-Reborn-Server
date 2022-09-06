@@ -34,7 +34,7 @@ public class CalendarController {
         return ResponseEntity.ok(eventId);
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{eventId}")
     @ApiOperation(value = "기념일 삭제하기 api")
     public ResponseEntity<Long> createNote(@PathVariable Long eventId,
                                            @ApiIgnore @CurrentUser Member member
