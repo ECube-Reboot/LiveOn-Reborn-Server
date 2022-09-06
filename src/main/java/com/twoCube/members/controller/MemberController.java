@@ -3,9 +3,7 @@ package com.twoCube.members.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.members.domain.Member;
-import com.twoCube.members.dto.MemberInfoRequest;
-import com.twoCube.members.dto.NicknameRequest;
-import com.twoCube.members.dto.ProfileResponse;
+import com.twoCube.members.dto.*;
 import com.twoCube.members.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,9 +48,25 @@ public class MemberController {
 
     @PatchMapping("/nickname")
     @ApiOperation(value = "닉네임 편집 api")
-    public ResponseEntity<ProfileResponse> updateProfile(@RequestBody NicknameRequest nicknameRequest,
+    public ResponseEntity<ProfileResponse> updateNickname(@RequestBody NicknameRequest nicknameRequest,
                                                          @ApiIgnore @CurrentUser Member member) {
-        ProfileResponse profileResponse = memberService.updateProfile(member, nicknameRequest);
-        return ResponseEntity.ok(profileResponse);
+        memberService.updateNickname(member, nicknameRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/birthday")
+    @ApiOperation(value = "생일 편집 api")
+    public ResponseEntity<ProfileResponse> updateBirthday(@RequestBody BirthdayRequest birthdayRequest,
+                                                          @ApiIgnore @CurrentUser Member member) {
+        memberService.updateBirthday(member, birthdayRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/officialDate")
+    @ApiOperation(value = "닉네임 편집 api")
+    public ResponseEntity<ProfileResponse> updateOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,
+                                                              @ApiIgnore @CurrentUser Member member) {
+        memberService.updateOfficialDate(member, officialDateRequest);
+        return ResponseEntity.noContent().build();
     }
 }
