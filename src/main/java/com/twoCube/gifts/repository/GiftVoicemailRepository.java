@@ -18,7 +18,6 @@ import java.util.List;
 public interface GiftVoicemailRepository extends JpaRepository<GiftVoicemail, Long> {
     List<GiftVoicemail> findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
 
-    List<GiftVoicemail> findAllByGiftDateAndCouple(LocalDateTime start, LocalDateTime end, Couple couple);
 
     List<GiftVoicemail> findAllByCouple(Couple couple);
 

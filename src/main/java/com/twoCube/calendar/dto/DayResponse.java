@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 public class DayResponse {
 
-    private EventResponse eventResponse;
+    private List<EventResponse> eventResponse;
     private List<UserAudioResponse> audioResponseList;
     private List<UserPolaroidResponse> polaroidResponseList;
     private List<UserNoteResponse> noteResponseList;
@@ -21,11 +21,10 @@ public class DayResponse {
 
     public DayResponse(List<Event> eventList, List<GiftVoicemail> giftVoicemailList, List<GiftPolaroid> giftPolaroidList,
                        List<GiftNote> giftNoteList, List<GiftFlower> giftFlowerList, Member member) {
-        this.eventResponse = EventResponse.from(eventList.get(0));
+        this.eventResponse = EventResponse.listFrom(eventList);
         this.audioResponseList = UserAudioResponse.listFrom(giftVoicemailList, member);
         this.polaroidResponseList = UserPolaroidResponse.listFrom(giftPolaroidList);
         this.noteResponseList = UserNoteResponse.listFrom(giftNoteList);
         this.flowerResponseList = UserFlowerResponse.listFrom(giftFlowerList);
     }
-
 }

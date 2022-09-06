@@ -57,16 +57,12 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public DayResponse getDay(Member member, LocalDate calendarRequest) {
-//        LocalDate start = calendarRequest.withDayOfMonth(1);
-//        LocalDateTime startDate = calendarRequest.withDayOfMonth(1).atStartOfDay();
-//        LocalDate end = calendarRequest.withDayOfMonth(start.lengthOfMonth());
-//        LocalDateTime endDate = calendarRequest.withDayOfMonth(start.lengthOfMonth()).atTime(LocalTime.MAX);
 
         List<Event> events = eventRepository.findAllByEventDateAndCouple(calendarRequest, member.getCouple());
-        List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByGiftDateAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
-        List<GiftNote> giftNotes = giftNoteRepository.findAllByGiftDateAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
-        List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByGiftDateAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
-        List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByGiftDateAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
+        List<GiftFlower> giftFlowers = giftFlowerRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
+        List<GiftNote> giftNotes = giftNoteRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
+        List<GiftPolaroid> giftPolaroids = giftPolaroidRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
+        List<GiftVoicemail> giftVoicemails = giftVoicemailRepository.findAllByCreatedAtGreaterThanAndCreatedAtLessThanAndCouple(calendarRequest.atStartOfDay(), calendarRequest.atTime(LocalTime.MAX), member.getCouple());
 
         return new DayResponse(events, giftVoicemails, giftPolaroids, giftNotes, giftFlowers, member);
     }
