@@ -77,6 +77,7 @@ public class GiftServiceImpl implements GiftService {
         return nonRecievedGiftType;
     }
 
+    @Override
     public boolean haveUserGifted(Member member) {
         LocalDateTime startDate = LocalDate.now().atStartOfDay();
         LocalDateTime endDate = LocalDate.now().atTime(LocalTime.MAX);
