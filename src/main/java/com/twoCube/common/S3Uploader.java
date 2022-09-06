@@ -92,6 +92,9 @@ public class S3Uploader {
     }
 
     private Optional<File> convert(MultipartFile file) throws IOException {
+        System.out.println("converting");
+        System.out.println(file.getOriginalFilename());
+        lof.info(file.getOriginalFilename());
 
         File convertFile = new File(System.getProperty("java.io.tmpdir") +
                 System.getProperty("file.separator") +
