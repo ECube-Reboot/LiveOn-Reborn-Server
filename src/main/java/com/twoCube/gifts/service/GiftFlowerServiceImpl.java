@@ -37,7 +37,7 @@ public class GiftFlowerServiceImpl implements GiftFlowerService {
     @Override
     public List<GiftFlowerResponse> getFlowerList(Member member) {
         List<GiftFlower> giftFlowerList =
-                giftFlowerRepository.findAllByCouple(member.getCouple());
+                giftFlowerRepository.findAllByCoupleOrderByIdDesc(member.getCouple());
         return GiftFlowerResponse.listFrom(giftFlowerList);
     }
 
