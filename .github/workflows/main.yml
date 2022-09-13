@@ -40,7 +40,7 @@ jobs:
 
       # appspec.yml Copy
       - name: Copy appspec
-        run: cp appspec-prod.yml ./prod-deploy/
+        run: cp appspec.yml ./prod-deploy/
         
       # script file Copy
       - name: Copy shell
