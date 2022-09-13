@@ -70,5 +70,5 @@ jobs:
           --application-name 2cube \
           --deployment-group-name 2Cube-deploy-group \
           --file-exists-behavior OVERWRITE \
-          --s3-location bucket=ecube-deploy,bundleType=zip,key=2cube-build.zip \
+          --s3-location bucket=ecube-prod-deploy,bundleType=zip,key=2cube-build.zip \
           --region ap-northeast-2
