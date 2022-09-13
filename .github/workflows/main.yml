@@ -59,7 +59,7 @@ jobs:
           aws s3 cp \
           --region ap-northeast-2 \
           --acl private \
-          ./2cube-build.zip s3://ecube-deploy/
+          ./2cube-build.zip s3://ecube-prod-deploy/
 
       - name: Deploy
         env:
