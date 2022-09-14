@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 @Builder
 public class GiftFlowerResponse {
     private String giftFlowerName;
+    private String giftFlowerMessage;
 
     public static GiftFlowerResponse from(GiftFlower giftFlower) {
         return GiftFlowerResponse.builder()
                 .giftFlowerName(giftFlower.getName().toString())
+                .giftFlowerMessage(giftFlower.getMessage())
                 .build();
     }
 
