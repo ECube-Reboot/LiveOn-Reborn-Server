@@ -69,6 +69,6 @@ jobs:
           aws deploy create-deployment \
           --application-name 2cube \
           --deployment-group-name 2Cube-deploy-group \
-          --file-exists-behavior OVERWRITE \
+          --file-exists-behavior RETATE \
           --s3-location bucket=ecube-prod-deploy,bundleType=zip,key=2cube-build.zip \
           --region ap-northeast-2
