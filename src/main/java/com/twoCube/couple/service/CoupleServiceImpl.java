@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CoupleServiceImpl implements CoupleService{
+public class CoupleServiceImpl implements CoupleService {
     private final CoupleRepository coupleRepository;
     private final MemberRepository memberRepository;
 
@@ -35,10 +35,10 @@ public class CoupleServiceImpl implements CoupleService{
 
         Couple couple = coupleRepository.findByCode(code.getCode());
 
-        if(couple == null){
+        if (couple == null) {
             return "fail: code does Not Exist";
         }
-        if(memberRepository.countByCouple(couple) > 2){
+        if (memberRepository.countByCouple(couple) > 2) {
             return "fail: max num for couple is 2";
         }
 

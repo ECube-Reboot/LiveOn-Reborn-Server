@@ -2,6 +2,7 @@ package com.twoCube.members.service;
 
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
+import com.twoCube.couple.domain.Couple;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.domain.WithdrawlMember;
 import com.twoCube.members.dto.*;
@@ -55,7 +56,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public CoupleResponse checkIfCouple(Member member) {
-        if(member.getCouple() != null){
+        Couple couple = member.getCouple();
+        if(memberRepository.countByCouple(couple) == 2){
             return CoupleResponse.builder().coupleMatched(true).build();
         }else{
             return CoupleResponse.builder().coupleMatched(false).build();
