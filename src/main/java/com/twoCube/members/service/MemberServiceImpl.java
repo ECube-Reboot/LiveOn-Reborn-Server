@@ -87,6 +87,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void withdrawlMemberShip(Member member) {
         member.setDeleted(true);
+        member.setSocialId("withdrawledMember");
         memberRepository.save(member);
         withdrawlRepository.save(WithdrawlMember.builder().member(member).build());
         return;
