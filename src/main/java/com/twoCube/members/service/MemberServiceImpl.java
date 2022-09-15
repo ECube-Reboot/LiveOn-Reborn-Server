@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,8 @@ public class MemberServiceImpl implements MemberService {
     public Long updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest) {
         member.setNickName(memberInfoRequest.getNickName());
         memberRepository.save(member);
-        Event birthDay = Event.builder().eventDate(memberInfoRequest.getBirthDay()).couple(member.getCouple()).memo("생일축하드려요").name(member.getNickName() + "생일").build();
-        Event officialDay = Event.builder().eventDate(memberInfoRequest.getBirthDay()).couple(member.getCouple()).memo("축하메시지를 남겨주세요").name("처음 사귄 날").build();
+        Event birthDay = Event.builder().eventDate(LocalDate.parse(memberInfoRequest.getBirthDay())).couple(member.getCouple()).memo("생일축하드려요").name(member.getNickName() + "생일").build();
+        Event officialDay = Event.builder().eventDate(LocalDate.parse(memberInfoRequest.getBirthDay())).couple(member.getCouple()).memo("축하메시지를 남겨주세요").name("처음 사귄 날").build();
         eventRepository.save(birthDay);
         eventRepository.save(officialDay);
         return member.getCouple().getId();
@@ -37,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public ProfileResponse getProfile(Member member){
+    public ProfileResponse getProfile(Member member) {
         List<Member> partner = memberRepository
                 .findByCouple(member.getCouple())
                 .stream().filter(person -> !person.getId().equals(member.getId()))
@@ -57,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public CoupleResponse checkIfCouple(Member member) {
         Couple couple = member.getCouple();
-        if(memberRepository.countByCouple(couple) == 2){
+        if (couple != null || memberRepository.countByCouple(couple) == 2){
             return CoupleResponse.builder().coupleMatched(true).build();
         }else{
             return CoupleResponse.builder().coupleMatched(false).build();

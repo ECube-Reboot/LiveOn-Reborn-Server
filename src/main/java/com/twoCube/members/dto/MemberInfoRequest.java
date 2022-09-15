@@ -7,6 +7,6 @@ import java.time.LocalDate;
 @Getter
 public class MemberInfoRequest {
     private String nickName;
-    private LocalDate birthDay;
-    private LocalDate officialDate;
+    private String birthDay;
+    private String officialDate;
 }

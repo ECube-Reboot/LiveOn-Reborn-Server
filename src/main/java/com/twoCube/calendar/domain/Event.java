@@ -1,5 +1,6 @@
 package com.twoCube.calendar.domain;
 
+import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,11 @@ public class Event extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
+
+    public Event setCouple(Couple couple) {
+        this.couple = couple;
+        return this;
+    }
 
     public void changeDate(LocalDate newDate) {
         this.eventDate = newDate;
