@@ -79,17 +79,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void updateOfficialDate(Member member,
-                                   OfficialDateRequest officialDateRequest) {
-        Event officialDate = eventRepository
-                .findByNameAndCouple("처음 사귄 날", member.getCouple())
-                .orElseThrow();
-        officialDate.changeDate(officialDateRequest.getOfficialDate());
-        eventRepository.save(officialDate);
-    }
-
-    @Override
-    @Transactional
     public void withdrawlMemberShip(Member member) {
         member.setDeleted(true);
         member.setSocialId("withdrawledMember");

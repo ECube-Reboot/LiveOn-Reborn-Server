@@ -68,11 +68,4 @@ public class MemberController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/officialDate")
-    @ApiOperation(value = "닉네임 편집 api")
-    public ResponseEntity<ProfileResponse> updateOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,
-                                                              @ApiIgnore @CurrentUser Member member) {
-        memberService.updateOfficialDate(member, officialDateRequest);
-        return ResponseEntity.noContent().build();
-    }
 }

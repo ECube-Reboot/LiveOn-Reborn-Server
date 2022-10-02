@@ -11,7 +11,6 @@ public interface MemberService  {
     void updateNickname(Member member, NicknameRequest profileRequest);
     void withdrawlMemberShip(Member member);
     void updateBirthday(Member member, BirthdayRequest birthdayRequest);
-    void updateOfficialDate(Member member,
-                            OfficialDateRequest officialDateRequest);
     CoupleResponse checkIfCouple(Member member);
+
 }

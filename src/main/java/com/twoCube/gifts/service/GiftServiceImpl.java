@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +43,12 @@ public class GiftServiceImpl implements GiftService {
 
         Optional<Event> officialDate = eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple());
 
-        Period period;
+        long period;
         if(officialDate.isEmpty()){
-            period = now.until(now);
+            period=0;
+            System.out.println("empty");
         }else {
-            period = now.until(officialDate.get().getEventDate());
+            period = ChronoUnit.DAYS.between(officialDate.get().getEventDate(), now);
         }
 
 
@@ -58,11 +60,12 @@ public class GiftServiceImpl implements GiftService {
 
         List<Member> partner = memberRepository
                 .findByCouple(member.getCouple())
-                .stream().filter(person -> person != member)
+                .stream().filter(person -> !person.getId().equals(member.getId()))
                 .collect(Collectors.toList());
+        System.out.println(partner.get(0).getNickName());
 
         MainResponse mainResponse = MainResponse.builder().currentUserName(member.getNickName())
-                .datedDays(period.getDays()).hasFlower(hasFlower).hasPolaroid(hasPolaroid).hasVoicemail(hasVoicemail)
+                .datedDays((int) period).hasFlower(hasFlower).hasPolaroid(hasPolaroid).hasVoicemail(hasVoicemail)
                 .userGifted(haveUserGifted(member)).partner(partner.get(0).getNickName())
                 .nonCheckedGiftType(nonRecievedGiftType).build();
 
