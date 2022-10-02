@@ -3,12 +3,14 @@ package com.twoCube.members.service;
 import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.couple.domain.Couple;
+import com.twoCube.couple.repository.CoupleRepository;
 import com.twoCube.members.domain.Member;
 import com.twoCube.members.domain.WithdrawlMember;
 import com.twoCube.members.dto.*;
 import com.twoCube.members.repository.MemberRepository;
 import com.twoCube.members.repository.WithdrawlMemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,17 +25,17 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final EventRepository eventRepository;
     private final WithdrawlMemberRepository withdrawlRepository;
+    private final CoupleRepository coupleRepository;
 
     @Override
     @Transactional
-    public Long updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest) {
+    public void updateMemberInfo(Member member, MemberInfoRequest memberInfoRequest) {
+
+
         member.setNickName(memberInfoRequest.getNickName());
         memberRepository.save(member);
-        Event birthDay = Event.builder().eventDate(LocalDate.parse(memberInfoRequest.getBirthDay())).couple(member.getCouple()).memo("생일축하드려요").name(member.getNickName() + "생일").build();
-        Event officialDay = Event.builder().eventDate(LocalDate.parse(memberInfoRequest.getBirthDay())).couple(member.getCouple()).memo("축하메시지를 남겨주세요").name("처음 사귄 날").build();
+        Event birthDay = Event.builder().eventDate(LocalDate.parse(memberInfoRequest.getBirthDay())).memo("생일축하드려요").name(member.getNickName() + "생일").member(member).build();
         eventRepository.save(birthDay);
-        eventRepository.save(officialDay);
-        return member.getCouple().getId();
     }
 
     @Override

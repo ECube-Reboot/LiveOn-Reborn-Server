@@ -2,8 +2,11 @@ package com.twoCube.couple.controller;
 
 import com.twoCube.common.annotation.CurrentUser;
 import com.twoCube.couple.dto.Code;
+import com.twoCube.couple.dto.OfficialDateRequest;
 import com.twoCube.couple.service.CoupleService;
 import com.twoCube.members.domain.Member;
+import com.twoCube.members.dto.BirthdayRequest;
+import com.twoCube.members.dto.ProfileResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +38,21 @@ public class CoupleController {
     ) {
         String statusMessage = coupleService.validateCode(code, member);
         return ResponseEntity.ok(statusMessage);
+    }
+
+    @PostMapping("/officialdate")
+    @ApiOperation(value = "처음 만난 날 api")
+    public ResponseEntity<ProfileResponse> createOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,
+                                                          @ApiIgnore @CurrentUser Member member) {
+        coupleService.createOfficialDate(officialDateRequest, member);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/officialdate")
+    @ApiOperation(value = "처음 만난 날 api")
+    public ResponseEntity<ProfileResponse> updateOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,
+                                                          @ApiIgnore @CurrentUser Member member) {
+        coupleService.updateOfficialDate(officialDateRequest, member);
+        return ResponseEntity.noContent().build();
     }
 }

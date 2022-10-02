@@ -25,10 +25,8 @@ public class MemberController {
     public ResponseEntity<Long> saveMemberInfo(@RequestBody MemberInfoRequest memberInfoRequest,
                                                @ApiIgnore @CurrentUser Member member
     ) {
-        System.out.println(member.getCouple());
-        System.out.println(memberInfoRequest.getBirthDay());
-        Long coupleId = memberService.updateMemberInfo(member, memberInfoRequest);
-        return ResponseEntity.ok(coupleId);
+        memberService.updateMemberInfo(member, memberInfoRequest);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/couple")

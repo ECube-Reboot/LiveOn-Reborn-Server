@@ -3,6 +3,7 @@ package com.twoCube.calendar.domain;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.common.domain.BaseTimeEntity;
 import com.twoCube.couple.domain.Couple;
+import com.twoCube.members.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +34,10 @@ public class Event extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     public Event setCouple(Couple couple) {
         this.couple = couple;

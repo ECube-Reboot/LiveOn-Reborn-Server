@@ -8,5 +8,4 @@ import java.time.LocalDate;
 public class MemberInfoRequest {
     private String nickName;
     private String birthDay;
-    private String officialDate;
 }

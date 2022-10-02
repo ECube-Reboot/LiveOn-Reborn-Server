@@ -1,5 +1,6 @@
 package com.twoCube.gifts.service;
 
+import com.twoCube.calendar.domain.Event;
 import com.twoCube.calendar.repository.EventRepository;
 import com.twoCube.couple.domain.Couple;
 import com.twoCube.gifts.dto.EGiftType;
@@ -19,6 +20,7 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,10 +40,15 @@ public class GiftServiceImpl implements GiftService {
         Couple couple = member.getCouple();
         LocalDate now = LocalDate.now();
 
-        LocalDate officialDate = eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple())
-                .orElseThrow().getEventDate();
+        Optional<Event> officialDate = eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple());
 
-        Period period = now.until(now);
+        Period period;
+        if(officialDate.isEmpty()){
+            period = now.until(now);
+        }else {
+            period = now.until(officialDate.get().getEventDate());
+        }
+
 
         boolean hasFlower = giftFlowerRepository.existsByCouple(couple);
         boolean hasPolaroid = giftPolaroidRepository.existsByCouple(couple);
