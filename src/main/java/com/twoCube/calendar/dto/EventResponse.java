@@ -22,7 +22,7 @@ public class EventResponse {
                 .upcomingEventId(event.getId())
                 .upcomingEventTitle(event.getName())
                 .upcomingEventDate(event.getEventDate().toString())
-                .upcomingEventMemo(event.getMemo())
+                .upcomingEventMemo(event.getMemo() == null ? "" : event.getMemo())
                 .build();
     }
 
