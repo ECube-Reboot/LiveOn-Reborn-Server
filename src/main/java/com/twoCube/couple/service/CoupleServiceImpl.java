@@ -30,7 +30,10 @@ public class CoupleServiceImpl implements CoupleService {
         couple.setCode(RandomStringUtils.randomAlphanumeric(5));
         coupleRepository.save(couple);
 
-        member.setCouple(couple);
+        if(member.getCouple() == null){
+            member.setCouple(couple);
+        }
+
         memberRepository.save(member);
 
         Event event = eventRepository.findByMember(member);
