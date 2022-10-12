@@ -36,8 +36,8 @@ public class CoupleServiceImpl implements CoupleService {
 
         memberRepository.save(member);
 
-        Event event = eventRepository.findByMember(member);
-        event.setCouple(couple);
+        List<Event> events = eventRepository.findByMember(member);
+        events.stream().map(event -> event.setCouple(couple));
 
         return new Code(couple.getCode());
     }
@@ -47,9 +47,7 @@ public class CoupleServiceImpl implements CoupleService {
     public String validateCode(Code code, Member member) {
 
         Couple couple = coupleRepository.findByCode(code.getCode());
-        System.out.println(couple.getId());
-        Event eventList = eventRepository.findByMember(member);
-        System.out.println();
+        List<Event> events = eventRepository.findByMember(member);
 
         System.out.println(couple.getId());
         if (couple == null) {
@@ -59,8 +57,7 @@ public class CoupleServiceImpl implements CoupleService {
             return "fail: max num for couple is 2";
         }
 
-        System.out.println(eventList.getId());
-        eventList.setCouple(couple);
+        events.stream().map(event -> event.setCouple(couple));
         member.setCouple(couple);
         memberRepository.save(member);
         return "success";

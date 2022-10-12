@@ -17,5 +17,5 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByEventDateAndCouple(LocalDate start, Couple couple);
     Optional<Event> findByNameAndCouple(@Param(value = "name") String name, @Param(value="couple")Couple couple);
     List<Event> findAllByCouple(Couple couple);
-    Event findByMember(Member member);
+    List<Event> findByMember(Member member);
 }
