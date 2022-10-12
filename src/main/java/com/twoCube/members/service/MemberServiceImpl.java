@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -49,12 +50,13 @@ public class MemberServiceImpl implements MemberService {
                 .collect(Collectors.toList());
         Optional<Event> event = eventRepository
                 .findByNameAndCouple("처음 사귄 날", member.getCouple());
-        LocalDate days = LocalDate.of(1, 1, 1);
+        LocalDate officialDate = LocalDate.of(1, 1, 1);
         if (!event.isEmpty()) {
-            days = event.get().getEventDate();
+            officialDate = event.get().getEventDate();
         }
+        List<Event> birthDay = eventRepository.findByMember(member);
 
-        return new ProfileResponse(member, partner, days);
+        return new ProfileResponse(member, partner, officialDate, birthDay);
     }
 
     @Override

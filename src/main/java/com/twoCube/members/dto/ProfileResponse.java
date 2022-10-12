@@ -13,13 +13,16 @@ public class ProfileResponse {
     private String currentUserName;
     private String partnerName;
     private LocalDate officialDate;
+    private LocalDate birthday;
 
-    public ProfileResponse(Member currentUser, List<Member> partner, LocalDate firstDay) {
+    public ProfileResponse(Member currentUser, List<Member> partner, LocalDate firstDay,
+                           List<Event> birthday) {
         this.currentUserName = currentUser.getNickName();
         this.currentUserName = currentUser.getNickName();
         if(partner.size() != 0){
             this.partnerName = partner.get(0).getNickName();
         }
         this.officialDate = firstDay;
+        this.birthday = birthday.get(0).getEventDate();
     }
 }
