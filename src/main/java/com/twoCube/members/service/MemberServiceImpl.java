@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
                 .collect(Collectors.toList());
         Optional<Event> event = eventRepository
                 .findByNameAndCouple("처음 사귄 날", member.getCouple());
-        LocalDate days = LocalDate.of(0, 0, 0);
+        LocalDate days = LocalDate.of(1, 1, 1);
         if (!event.isEmpty()) {
             days = event.get().getEventDate();
         }
