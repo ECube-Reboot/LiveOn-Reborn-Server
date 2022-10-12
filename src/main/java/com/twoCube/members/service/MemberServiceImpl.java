@@ -53,7 +53,8 @@ public class MemberServiceImpl implements MemberService {
         if (!event.isEmpty()) {
             days = event.get().getEventDate();
         }
-        return new ProfileResponse(member, partner.get(0), days);
+
+        return new ProfileResponse(member, partner, days);
     }
 
     @Override
