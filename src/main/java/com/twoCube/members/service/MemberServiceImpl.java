@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public CoupleResponse checkIfCouple(Member member) {
         Couple couple = member.getCouple();
-        if (couple != null || memberRepository.countByCouple(couple) == 2) {
+        if (couple != null && memberRepository.countByCouple(couple) == 2) {
             return CoupleResponse.builder().coupleMatched(true).build();
         } else {
             return CoupleResponse.builder().coupleMatched(false).build();
