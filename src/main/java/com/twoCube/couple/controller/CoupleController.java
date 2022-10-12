@@ -40,14 +40,6 @@ public class CoupleController {
         return ResponseEntity.ok(statusMessage);
     }
 
-    @PostMapping("/officialdate")
-    @ApiOperation(value = "처음 만난 날 api")
-    public ResponseEntity<ProfileResponse> createOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,
-                                                          @ApiIgnore @CurrentUser Member member) {
-        coupleService.createOfficialDate(officialDateRequest, member);
-        return ResponseEntity.noContent().build();
-    }
-
     @PatchMapping("/officialdate")
     @ApiOperation(value = "처음 만난 날 api")
     public ResponseEntity<ProfileResponse> updateOfficialDate(@RequestBody OfficialDateRequest officialDateRequest,

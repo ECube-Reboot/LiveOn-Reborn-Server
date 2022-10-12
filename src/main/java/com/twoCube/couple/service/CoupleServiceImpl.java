@@ -13,6 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,19 +26,20 @@ public class CoupleServiceImpl implements CoupleService {
 
     @Override
     public Code generateCode(Member member) {
-
         Couple couple = new Couple();
-        couple.setCode(RandomStringUtils.randomAlphanumeric(5));
-        coupleRepository.save(couple);
 
         if(member.getCouple() == null){
+            couple.setCode(RandomStringUtils.randomAlphanumeric(5));
+            coupleRepository.save(couple);
             member.setCouple(couple);
+            memberRepository.save(member);
         }
-
-        memberRepository.save(member);
 
         List<Event> events = eventRepository.findByMember(member);
         events.stream().map(event -> event.setCouple(couple));
+        eventRepository.save(Event.builder()
+                .eventDate(LocalDate.of(1, 1, 1))
+                .couple(member.getCouple()).name("처음 사귄 날").build());
 
         return new Code(couple.getCode());
     }
