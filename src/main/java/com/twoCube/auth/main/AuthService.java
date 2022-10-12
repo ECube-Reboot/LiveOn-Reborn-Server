@@ -31,7 +31,7 @@ public class AuthService {
         boolean isNewMember = false;
         boolean isUserSettingDone = false;
 
-        if (memberRepository.findBySocialId(member.getSocialId()).equals(Optional.empty())) {
+        if (memberRepository.findBySocialId(member.getSocialId()).equals(Optional.empty())) { // 새 멤버
             memberRepository.save(member);
 
             System.out.println(member.getSocialId());

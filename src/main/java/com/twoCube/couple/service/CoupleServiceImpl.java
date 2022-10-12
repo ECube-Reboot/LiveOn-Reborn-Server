@@ -25,23 +25,25 @@ public class CoupleServiceImpl implements CoupleService {
     private final EventRepository eventRepository;
 
     @Override
+    @Transactional
     public Code generateCode(Member member) {
-        Couple couple = new Couple();
 
-        if(member.getCouple() == null){
+        if (member.getCouple() == null) {
+            Couple couple = new Couple();
             couple.setCode(RandomStringUtils.randomAlphanumeric(5));
             coupleRepository.save(couple);
             member.setCouple(couple);
             memberRepository.save(member);
         }
 
+
         List<Event> events = eventRepository.findByMember(member);
-        events.stream().map(event -> event.setCouple(couple));
+        events.stream().map(event -> event.setCouple(member.getCouple()));
         eventRepository.save(Event.builder()
                 .eventDate(LocalDate.of(1, 1, 1))
                 .couple(member.getCouple()).name("처음 사귄 날").build());
 
-        return new Code(couple.getCode());
+        return new Code(member.getCouple().getCode());
     }
 
     @Override
