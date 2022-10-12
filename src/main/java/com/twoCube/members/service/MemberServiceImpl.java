@@ -61,7 +61,6 @@ public class MemberServiceImpl implements MemberService {
     public void updateNickname(Member member, NicknameRequest profileRequest) {
         member.setNickName(profileRequest.getNickName());
         memberRepository.save(member);
-        ProfileResponse profileResponse = getProfile(member);
     }
 
     @Override
