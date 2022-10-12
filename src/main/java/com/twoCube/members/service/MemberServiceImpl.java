@@ -14,8 +14,10 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +47,13 @@ public class MemberServiceImpl implements MemberService {
                 .findByCouple(member.getCouple())
                 .stream().filter(person -> !person.getId().equals(member.getId()))
                 .collect(Collectors.toList());
-        return new ProfileResponse(member, partner.get(0), eventRepository.findByNameAndCouple("처음 사귄 날", member.getCouple()).orElseThrow());
+        Optional<Event> event = eventRepository
+                .findByNameAndCouple("처음 사귄 날", member.getCouple());
+        LocalDate days = LocalDate.of(0, 0, 0);
+        if (!event.isEmpty()) {
+            days = event.get().getEventDate();
+        }
+        return new ProfileResponse(member, partner.get(0), days);
     }
 
     @Override
@@ -60,9 +68,9 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public CoupleResponse checkIfCouple(Member member) {
         Couple couple = member.getCouple();
-        if (couple != null || memberRepository.countByCouple(couple) == 2){
+        if (couple != null || memberRepository.countByCouple(couple) == 2) {
             return CoupleResponse.builder().coupleMatched(true).build();
-        }else{
+        } else {
             return CoupleResponse.builder().coupleMatched(false).build();
         }
     }

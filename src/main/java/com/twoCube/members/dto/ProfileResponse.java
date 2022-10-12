@@ -13,10 +13,10 @@ public class ProfileResponse {
     private String partnerName;
     private LocalDate officialDate;
 
-    public ProfileResponse(Member currentUser, Member partner, Event firstDay) {
+    public ProfileResponse(Member currentUser, Member partner, LocalDate firstDay) {
         this.currentUserName = currentUser.getNickName();
         this.currentUserName = currentUser.getNickName();
         this.partnerName = partner.getNickName();
-        this.officialDate = firstDay.getEventDate();
+        this.officialDate = firstDay;
     }
 }
